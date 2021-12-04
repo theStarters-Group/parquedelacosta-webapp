@@ -9,48 +9,53 @@
 	</header>
 	<!-- - -->
 	<section>
-		<div class="container">
-
-			<div class="cards">
-				<img class="card-img-top" src="img/vuelta_al_mundo.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">Vuelta al Mundo</h4>
-					<p class="card-text">Altura mínima requerida 0,70 m Entre 0,70
-						m y 1,30 m deberán subir con un adulto responsable directo</p>
-					<a href="https://youtu.be/hr1Ud3_eK6I" class="btn btn-primary">Ver</a>
+		<div class="container d-flex flex-column">
+			<div class="d-flex align-items-center">
+				<div class="cards">
+					<img class="card-img-top" src="img/vuelta_al_mundo.jpg" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">Vuelta al Mundo</h4>
+						<p class="card-text">Altura mínima requerida 0,70 m Entre
+							0,70 m y 1,30 m deberán subir con un adulto responsable directo</p>
+						<a href="https://youtu.be/hr1Ud3_eK6I"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
+				</div>
+				<div class="cards">
+					<img class="card-img-top" src="img/monza_karting.jpg" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">Monza Karting</h4>
+						<p class="card-text">Altura mínima requerida 1,60 M
+							Atracción no disponible con pista mojada</p>
+						<a href="https://youtu.be/rLUT2ivwEsQ"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
 				</div>
 			</div>
-			<div class="cards">
-				<img class="card-img-top" src="img/monza_karting.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">Monza Karting</h4>
-					<p class="card-text">Altura mínima requerida 1,60 M Atracción
-						no disponible con pista mojada</p>
-					<a href="https://youtu.be/rLUT2ivwEsQ" class="btn btn-primary">Ver</a>
+			<div class="d-flex align-items-center">
+				<div class="cards">
+					<img class="card-img-top" src="img/orcas_voladoras.jpg" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">Orcas Voladoras</h4>
+						<p class="card-text">Altura mínima requerida 1,00M No apto
+							para menores de 4 años</p>
+						<a href="#!" class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
 				</div>
-			</div>
-			<div class="cards">
-				<img class="card-img-top" src="img/orcas_voladoras.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">Orcas Voladoras</h4>
-					<p class="card-text">Altura mínima requerida 1,00M No apto para
-						menores de 4 años</p>
-					<a href="#!" class="btn btn-primary">Ver</a>
-				</div>
-			</div>
-			<div class="cards">
-				<img class="card-img-top" src="img/samba.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">Samba</h4>
-					<p class="card-text">Altura mínima requerida 1,30 M No apto
-						para menores de 12 años.</p>
-					<a href="https://youtu.be/cF77UItDdNc" class="btn btn-primary">Ver</a>
+				<div class="cards">
+					<img class="card-img-top" src="img/samba.jpg" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">Samba</h4>
+						<p class="card-text">Altura mínima requerida 1,30 M No apto
+							para menores de 12 años.</p>
+						<a href="https://youtu.be/cF77UItDdNc"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
 				</div>
 			</div>
 
 
 		</div>
-
 	</section>
 
 

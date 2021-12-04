@@ -9,53 +9,57 @@
 	</header>
 	<!-- - -->
 	<section>
-		<div class="container">
-
-			<div class="cards">
-				<img class="card-img-top" src="img/zombieland.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">Zombieland</h4>
-					<p class="card-text">Altura mínima requerida 1,20 M Entre 1,20
-						m y 1,40 m deberán ingresar con un adulto responsable directo.
-
-						JUEGO DISPONIBLE DESDE LAS 10AM</p>
-					<a href="https://youtu.be/FPVKXdZ9Hts" class="btn btn-primary">Ver</a>
+		<div class="container d-flex flex-column">
+			<div class="d-flex align-items-center">
+				<div class="cards">
+					<img class="card-img-top" src="img/zombieland.jpg" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">Zombieland</h4>
+						<p class="card-text">Altura mínima requerida 1,20 M Entre
+							1,20 m y 1,40 m deberán ingresar con un adulto responsable
+							directo. JUEGO DISPONIBLE DESDE LAS 10AM</p>
+						<a href="https://youtu.be/FPVKXdZ9Hts"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
+				</div>
+				<div class="cards">
+					<img class="card-img-top" src="img/cueva_dinos.jpg" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">La Cueva de los Dinos</h4>
+						<p class="card-text">Altura mínima requerida 1,10 M Entre
+							1,10M y 1,30M deberán ingresar acompañados por un adulto
+							responsable directo</p>
+						<a href="https://youtu.be/3Osy_gYD4ho"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
 				</div>
 			</div>
-			<div class="cards">
-				<img class="card-img-top" src="img/cueva_dinos.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">La Cueva de los Dinos</h4>
-					<p class="card-text">Altura mínima requerida 1,10 M Entre 1,10M
-						y 1,30M deberán ingresar acompañados por un adulto responsable
-						directo</p>
-					<a href="https://youtu.be/3Osy_gYD4ho" class="btn btn-primary">Ver</a>
+			<div class="d-flex align-items-center">
+				<div class="cards">
+					<img class="card-img-top" src="img/mansion_terror.webp" alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">La mansion del Terror</h4>
+						<p class="card-text">Altura mínima requerida 1,10 M Entre
+							1,10 m y 1,30 m deberán subir con un adulto responsable directo.</p>
+						<a href="https://youtu.be/929n8iPAlSU"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
+				</div>
+				<div class="cards">
+					<img class="card-img-top" src="img/maldicion_anubis.jpg"
+						alt="100px">
+					<div class="card-body">
+						<h4 class="card-title">La maldicion de Anubis</h4>
+						<p class="card-text">Altura mínima requerida 1,20 M Entre
+							1,20 m y 1,40 m deberán ingresar con un adulto responsable
+							directo. JUEGO DISPONIBLE DESDE LAS 10AM</p>
+						<a href="https://youtu.be/-Tu4Me30-QA"
+							class="btn btn-primary btn-atracciones">Ver</a>
+					</div>
 				</div>
 			</div>
-			<div class="cards">
-				<img class="card-img-top" src="img/mansion_terror.webp" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">La mansion del Terror</h4>
-					<p class="card-text">Altura mínima requerida 1,10 M Entre 1,10
-						m y 1,30 m deberán subir con un adulto responsable directo.</p>
-					<a href="https://youtu.be/929n8iPAlSU" class="btn btn-primary">Ver</a>
-				</div>
-			</div>
-			<div class="cards">
-				<img class="card-img-top" src="img/maldicion_anubis.jpg" alt="100px">
-				<div class="card-body">
-					<h4 class="card-title">La maldicion de Anubis</h4>
-					<p class="card-text">Altura mínima requerida 1,20 M Entre 1,20
-						m y 1,40 m deberán ingresar con un adulto responsable directo.
-
-						JUEGO DISPONIBLE DESDE LAS 10AM</p>
-					<a href="https://youtu.be/-Tu4Me30-QA" class="btn btn-primary">Ver</a>
-				</div>
-			</div>
-
 		</div>
 
-		</div>
 
 
 	</section>
