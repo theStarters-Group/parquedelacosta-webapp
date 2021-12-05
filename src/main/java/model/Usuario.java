@@ -69,6 +69,9 @@ public class Usuario {
 		this.admin = admin;
 		this.password = password;
 	}
+//	public Usuario(int i, String string, String string2, double j, double k, int l, boolean b) {
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public String toString() {
@@ -102,6 +105,10 @@ public class Usuario {
 
 	public LinkedList<Ofertable> getItinerario() {
 		return itinerario;
+	}
+
+	public boolean puedeComprar(Atraccion attraction) {
+		return attraction.getCosto() <= this.dinero && attraction.getTiempo() <= this.tiempo;
 	}
 
 	public boolean canAfford(Atraccion attraction) {

@@ -34,7 +34,7 @@
 							placeholder="Password" name="password">
 					</div>
 
-					<button type="submit"
+					<button action="index.jsp" type="submit"
 						class="button btn btn-primary py-0 w-100 mb-4">Ingresar</button>
 
 					<a class="link-secondary d-inline-block mb-4" href="#"><small>Olvido

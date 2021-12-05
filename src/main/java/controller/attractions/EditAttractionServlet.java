@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
 import services.AttractionService;
 
-@WebServlet("/attractions/edit.do")
+@WebServlet("/edit.do")
 public class EditAttractionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7598291131560345626L;
@@ -30,7 +30,7 @@ public class EditAttractionServlet extends HttpServlet {
 		Atraccion attraction = attractionService.find(id);
 		req.setAttribute("attraction", attraction);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/edit.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit.jsp");
 		dispatcher.forward(req, resp);
 	}
 
@@ -51,7 +51,7 @@ public class EditAttractionServlet extends HttpServlet {
 		} else {
 			req.setAttribute("attraction", attraction);
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/edit.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}

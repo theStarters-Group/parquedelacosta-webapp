@@ -11,17 +11,17 @@
 	<section>
 		<div class="container">
 
-			<div id="carouselExample" class="carousel slide" data-ride="carousel">
+			<div id="carouselExample" class="carousel-slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 					<li data-target="#carouselExample" data-slide-to="0" class="active"></li>
 					<li data-target="#carouselExample" data-slide-to="1"></li>
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="img/boomerang.jpg" alt="..." class="d-block w-100">
+						<img src="img/boomerang.jpg" alt="..." class="d-block w-50">
 					</div>
 					<div class="carousel-item">
-						<img src="img/vertigo_extremo.jpg" alt="..." class="d-block w-100">
+						<img src="img/vertigo_extremo.jpg" alt="..." class="d-block w-50">
 					</div>
 				</div>
 				<a href="#carouselExample" class="carousel-control-prev"

@@ -31,6 +31,10 @@ public class Atraccion extends Ofertable {
 		return errors.isEmpty();
 	}
 
+	public Map<String, String> getErrors() {
+		return errors;
+	}
+
 	public void validate() {
 		errors = new HashMap<String, String>();
 
@@ -47,7 +51,7 @@ public class Atraccion extends Ofertable {
 
 	@Override
 	public String toString() {
-		return this.nombre + ", Duraci�n: " + this.tiempo + "hs, Cupo m�ximo: " + this.cupo + ", Tipo: " + this.tipo
+		return this.nombre + ", Duracion: " + this.tiempo + "hs, Cupo maximo: " + this.cupo + ", Tipo: " + this.tipo
 				+ ", Costo Original: $" + this.costo + ".\n";
 	}
 
@@ -60,7 +64,7 @@ public class Atraccion extends Ofertable {
 	}
 
 	public double getTiempo() {
-		return tiempo;
+		return this.tiempo;
 	}
 
 	public double getCosto() {
@@ -129,6 +133,14 @@ public class Atraccion extends Ofertable {
 	public void actualizarCupo(Atraccion[] atraccionesEnPromocion) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public boolean canHost(int i) {
+		return cupo >= i;
+	}
+
+	public void host(int i) {
+		this.cupo -= i;
 	}
 
 }

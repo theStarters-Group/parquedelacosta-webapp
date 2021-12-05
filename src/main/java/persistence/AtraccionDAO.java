@@ -45,7 +45,7 @@ public class AtraccionDAO {
 
 	public int update(Atraccion attraction) {
 		try {
-			String sql = "UPDATE ATTRACTIONS SET NAME = ?, COST = ?, DURATION = ?, CAPACITY = ? WHERE ID = ?";
+			String sql = "UPDATE atracciones SET nombre = ?, precio = ?, duracion = ?, cupo = ? WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -65,7 +65,7 @@ public class AtraccionDAO {
 
 	public int delete(Atraccion attraction) {
 		try {
-			String sql = "DELETE FROM ATTRACTIONS WHERE ID = ?";
+			String sql = "DELETE FROM atracciones WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -133,7 +133,7 @@ public class AtraccionDAO {
 
 	public Atraccion find(int id) {
 		try {
-			String sql = "SELECT * FROM ATTRACTIONS WHERE id = ?";
+			String sql = "SELECT * FROM atracciones WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, id);

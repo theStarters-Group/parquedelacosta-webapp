@@ -13,8 +13,7 @@ public class AttractionService {
 		return atraccionDAO.findAll();
 	}
 
-	public Atraccion create(String name, double cost, double duration, int capacity, int type)
-			throws SQLException {
+	public Atraccion create(String name, double cost, double duration, int capacity, int type) throws SQLException {
 
 		Atraccion attraction = new Atraccion(-1, name, cost, duration, capacity, type);
 

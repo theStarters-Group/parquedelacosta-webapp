@@ -10,16 +10,136 @@
 	</header>
 	<!-- - -->
 	<section>
+		<c:if test="${user.isAdmin()}">
+			<div class="mb-3">
+				<a href="" class="btn btn-primary btn-admin" role="button"> <i
+					class="bi bi-plus-lg"></i> Modificar Atracciones
+				</a>
+				<!-- 				<a href="" class="btn btn-primary btn-admin" role="button"> <i -->
+				<!-- 					class="bi bi-plus-lg"></i> Modificar Promociones -->
+				<!-- 				</a> -->
+			</div>
+		</c:if>
 		<div class="container">
 			<h1>
-				�Bienvenido,
+				¡Bienvenido,
 				<c:out value="${user.nombre}"></c:out>
 				!
-				<c:out value="${user.password}"></c:out>
 			</h1>
+			<h4>
+				Tu contraseña es:
+				<c:out value="${user.password}"></c:out>
+				Tiempo:
+				<c:out value="${user.getTiempo()}"></c:out>
+				Dinero:
+				<c:out value="${user.getDinero()}"></c:out>
+				<br>
+				<c:out value="${user}"></c:out>
+			</h4>
 		</div>
 
+
+
+		<h1>Estas son las atracciones de Parque de la Costa</h1>
+
+
+
+		<p>
+
+
+			<c:if test="${flash != null}">
+				<div class="alert alert-danger">
+					<p>
+						<c:out value="${flash}" />
+						<c:if test="${errors != null}">
+							<ul>
+								<c:forEach items="${errors}" var="entry">
+									<li><c:out value="${entry.getValue()}"></c:out></li>
+								</c:forEach>
+							</ul>
+						</c:if>
+					</p>
+				</div>
+			</c:if>
+		<table class="table table-stripped table-hover">
+			<thead>
+				<tr>
+					<th>Atraccion</th>
+					<th>Costo</th>
+					<th>Duracion</th>
+					<th>Cupo</th>
+
+					<th>Acciones</th>
+					<!-- 					<th>id</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${attractions}" var="attraction">
+					<tr>
+						<td><strong><c:out value="${attraction.nombre}"></c:out></strong>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Cras pretium eros urna. Sed quis erat congue, bibendum tortor
+								malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
+						<td><c:out value="${attraction.costo}"></c:out></td>
+						<td><c:out value="${attraction.tiempo}"></c:out></td>
+						<td><c:out value="${attraction.cupo}"></c:out></td>
+
+
+
+						<td><c:if test="${user.isAdmin()}">
+								<a href="edit.do?id=${attraction.idAtraccion}"
+									class="btn btn-light rounded-0" role="button"><i
+									class="bi bi-pencil-fill"></i></a>
+								<a href="/turismo/attractions/delete.do?id=${attraction.nombre}"
+									class="btn btn-danger rounded" role="button"><i
+									class="bi bi-x-circle-fill"></i></a>
+							</c:if> <c:choose>
+
+								<c:when
+									test="${user.puedeComprar(attraction) && attraction.canHost(1)}">
+									<a
+										href="/turismo/attractions/buy.do?id=${attraction.idAtraccion}"
+										class="btn btn-success rounded" role="button">Comprar</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" class="btn btn-secondary rounded disabled"
+										role="button">No se puede comprar</a>
+								</c:otherwise>
+							</c:choose></td>
+						<%-- 						<td><c:out value="${attraction.idAtraccion}"></c:out></td> --%>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
+
+		<!-- 		<div id="carouselExample" class="carousel-slide" data-ride="carousel"> -->
+		<!-- 			<ol class="carousel-indicators"> -->
+		<!-- 				<li data-target="#carouselExample" data-slide-to="0" class="active"></li> -->
+		<!-- 				<li data-target="#carouselExample" data-slide-to="1"></li> -->
+		<!-- 			</ol> -->
+		<!-- 			<div class="carousel-inner"> -->
+		<!-- 				<div class="carousel-item active"> -->
+		<!-- 					<img src="img/boomerang.jpg" alt="..."> -->
+		<!-- 				</div> -->
+		<!-- 				<div class="carousel-item"> -->
+		<!-- 					<img src="img/vertigo_extremo.jpg" alt="..."> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 			<a href="#carouselExample" class="carousel-control-prev" -->
+		<!-- 				role="button" data-slide="prev"> <span -->
+		<!-- 				class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
+		<!-- 				class="visually-hidden">Anterior</span> -->
+		<!-- 			</a> <a href="#carouselExample" class="carousel-control-next" -->
+		<!-- 				role="button" data-slide="next"> <span -->
+		<!-- 				class="carousel-control-next-icon" aria-hidden="true"> </span> <span -->
+		<!-- 				class="visually-hidden">Siguiente</span></a> -->
+		<!-- 		</div> -->
+
+
+
 	</section>
+	<jsp:include page="partials/footer.jsp"></jsp:include>
 
 
 
