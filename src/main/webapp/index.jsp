@@ -12,8 +12,8 @@
 	<section>
 		<c:if test="${user.isAdmin()}">
 			<div class="mb-3">
-				<a href="" class="btn btn-primary btn-admin" role="button"> <i
-					class="bi bi-plus-lg"></i> Modificar Atracciones
+				<a href="create.jsp" class="btn btn-primary btn-admin" role="button">
+					<i class="bi bi-plus-lg"></i> Crear Atracciones
 				</a>
 				<!-- 				<a href="" class="btn btn-primary btn-admin" role="button"> <i -->
 				<!-- 					class="bi bi-plus-lg"></i> Modificar Promociones -->
@@ -34,7 +34,6 @@
 				Dinero:
 				<c:out value="${user.getDinero()}"></c:out>
 				<br>
-				<c:out value="${user}"></c:out>
 			</h4>
 		</div>
 
@@ -90,7 +89,7 @@
 								<a href="edit.do?id=${attraction.idAtraccion}"
 									class="btn btn-light rounded-0" role="button"><i
 									class="bi bi-pencil-fill"></i></a>
-								<a href="/turismo/attractions/delete.do?id=${attraction.nombre}"
+								<a href="delete.do?id=${attraction.idAtraccion}"
 									class="btn btn-danger rounded" role="button"><i
 									class="bi bi-x-circle-fill"></i></a>
 							</c:if> <c:choose>
@@ -112,7 +111,7 @@
 			</tbody>
 		</table>
 
-
+		<!--Carousel por armar -->
 		<!-- 		<div id="carouselExample" class="carousel-slide" data-ride="carousel"> -->
 		<!-- 			<ol class="carousel-indicators"> -->
 		<!-- 				<li data-target="#carouselExample" data-slide-to="0" class="active"></li> -->

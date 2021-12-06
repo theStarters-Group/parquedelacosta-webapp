@@ -7,10 +7,9 @@
 	</div>
 	<div class="navbar_centro">
 		<div>
-			<a class="link_navbar" href="index.jsp">Inicio</a>
+			<a class="link_navbar" href="index.do">Inicio</a>
 		</div>
 		<div class="dropdown-container">
-			<!-- 				<a href="atracciones.HTML">Atracciones</a> -->
 			<span>Atracciones</span>
 			<ul>
 				<li><a class="link_navbar" href="extremo.jsp">Paseo Extremo</a></li>
@@ -39,9 +38,8 @@
 
 			<span><c:out value="${user.nombre}"></c:out></span>
 			<ul>
-				<li><a class="link_navbar" href="comprar.jsp">Comprar</a></li>
-				<li><a class="link_navbar" href="itinerario.jsp">Mi
-						Itinerario</a></li>
+				<!-- 				<li><a class="link_navbar" href="comprar.jsp">Comprar</a></li> -->
+				<li><a class="link_navbar" href="itinerario.jsp">Itinerario</a></li>
 				<li><a class="link_navbar" href="perfil.jsp">Mi Perfil</a></li>
 				<li><a class="link_navbar" href="logout">Salir</a></li>
 			</ul>

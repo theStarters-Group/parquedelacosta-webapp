@@ -13,9 +13,9 @@ public class AttractionService {
 		return atraccionDAO.findAll();
 	}
 
-	public Atraccion create(String name, double cost, double duration, int capacity, int type) throws SQLException {
+	public Atraccion create(Integer id, String name, double cost, double duration, int capacity) throws SQLException {
 
-		Atraccion attraction = new Atraccion(-1, name, cost, duration, capacity, type);
+		Atraccion attraction = new Atraccion(id, name, cost, duration, capacity);
 
 		if (attraction.isValid()) {
 			AtraccionDAO attractionDAO = new AtraccionDAO();
@@ -26,7 +26,7 @@ public class AttractionService {
 		return attraction;
 	}
 
-	public Atraccion update(int id, String name, int cost, double duration, int capacity) {
+	public Atraccion update(int id, String name, double cost, double duration, int capacity) {
 		AtraccionDAO atraccionDAO = new AtraccionDAO();
 		Atraccion attraction = atraccionDAO.find(id);
 

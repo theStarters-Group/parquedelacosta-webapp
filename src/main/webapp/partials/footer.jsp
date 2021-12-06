@@ -2,14 +2,13 @@
 	<div class="footercardone">
 		<span class="titlefooter">Encontranos en:</span>
 		<div class="firstcolumn">
-			<span>icon1</span> <span>icon2</span> <span>icon3</span>
+			<span>icono1</span> <span>icono2</span> <span>icono3</span>
 		</div>
 	</div>
 	<div class="footercardtwo">
 		<span class="titlefooter">Ubicacion</span>
 		<div class="secondcolumn">
-			<span>Direccion 123, A class</span> <span>Buenos Aires, Argentina</span> <span>AGS
-				de *****</span>
+			<span>Direccion 123, A class</span> <span>Buenos Aires, Argentina</span> <span>Argentina Programa 2021</span>
 		</div>
 	</div>
 	<div class="footercardthree">

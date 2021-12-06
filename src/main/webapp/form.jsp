@@ -2,34 +2,34 @@
 <div class="modal-body">
 	<div class="mb-3">
 		<label for="name" class="col-form-label">Nombre:</label> <input
-			type="text" class="form-control" id="name" name="name"
-			required value="${attraction.nombre}">
+			type="text" class="form-control" id="name" name="name" required
+			value="${attraction.nombre}">
 	</div>
 	<div class="mb-3">
 		<label for="cost"
-			class='col-form-label ${atraccion.errors.get("cost") != null ? "is-invalid" : "" }'>Costo:</label>
+			class='col-form-label ${attraction.errors.get("costo") != null ? "is-invalid" : "" }'>Costo:</label>
 		<input class="form-control" type="number" id="cost" name="cost"
 			required value="${attraction.costo}"></input>
 		<div class="invalid-feedback">
-			<c:out value='${atraccion.errors.get("cost")}'></c:out>
+			<c:out value='${attraction.errors.get("costo")}'></c:out>
 		</div>
 	</div>
 	<div class="mb-3">
 		<label for="duration"
-			class='col-form-label ${atraccion.errors.get("duration") != null ? "is-invalid" : "" }'>Duration:</label>
-		<input class="form-control" type="number" id="duration" name="duration"
-			required value="${attraction.tiempo}"></input>
+			class='col-form-label ${attraction.errors.get("duracion") != null ? "is-invalid" : "" }'>Duracion:</label>
+		<input step="0.01" class="form-control" type="number" id="duration"
+			name="duration" required value="${attraction.tiempo}"></input>
 		<div class="invalid-feedback">
-			<c:out value='${atraccion.errors.get("duration")}'></c:out>
+			<c:out value='${attraction.errors.get("duracion")}'></c:out>
 		</div>
 	</div>
 	<div class="mb-3">
 		<label for="capacity"
-			class='col-form-label ${atraccion.errors.get("capacity") != null ? "is-invalid" : "" }'>Capacity:</label>
-		<input class="form-control" type="number" id="capacity" name="capacity"
-			required value="${attraction.cupo}"></input>
+			class='col-form-label ${attraction.errors.get("cupo") != null ? "is-invalid" : "" }'>Cupo:</label>
+		<input class="form-control" type="number" id="capacity"
+			name="capacity" required value="${attraction.cupo}"></input>
 		<div class="invalid-feedback">
-			<c:out value='${atraccion.errors.get("capacity")}'></c:out>
+			<c:out value='${attraction.errors.get("cupo")}'></c:out>
 		</div>
 	</div>
 </div>

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import services.AttractionService;
 
-@WebServlet("/attractions/delete.do")
+@WebServlet("/delete.do")
 public class DeleteAttractionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1537949074766873118L;
@@ -27,7 +27,7 @@ public class DeleteAttractionServlet extends HttpServlet {
 
 		attractionService.delete(id);
 
-		resp.sendRedirect("/turismo/attractions/index.do");
+		resp.sendRedirect("index.do");
 	}
 
 

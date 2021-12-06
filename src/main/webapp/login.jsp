@@ -6,18 +6,18 @@
 
 </head>
 <body>
-	<header></header>
 	<!-- - -->
-	<section>
-
-		<c:if test="${flash != null}">
-			<div class="alert alert-danger">
-				<p>
-					<c:out value="${flash}" />
-				</p>
-			</div>
-		</c:if>
-		<form action="login" method="post">
+	<section class="login">
+		<div class="alerts">
+			<c:if test="${flash != null}">
+				<div class="alert alert-danger">
+					<p>
+						<c:out value="${flash}" />
+					</p>
+				</div>
+			</c:if>
+		</div>
+		<form class="form_login" action="login" method="post">
 			<div id="login-box" class="col-12 col-lg-5 ms-auto">
 				<div class="p-5 bg-light rounded text-center">
 
@@ -37,14 +37,14 @@
 					<button action="index.jsp" type="submit"
 						class="button btn btn-primary py-0 w-100 mb-4">Ingresar</button>
 
-					<a class="link-secondary d-inline-block mb-4" href="#"><small>Olvido
-							su contraseña?</small></a>
+					<a class="link-secondary d-inline-block mb-4" href="#"> <small>Olvido
+							su contraseña?</small>
+					</a>
 
 				</div>
 			</div>
 		</form>
 	</section>
-
 
 	<!-- jQuery library -->
 	<script
