@@ -32,6 +32,17 @@
 			<c:out value='${attraction.errors.get("cupo")}'></c:out>
 		</div>
 	</div>
+	<div class="mb-3">
+		<label for="tipo"
+			class='col-form-label ${attraction.errors.get("tipo") != null ? "is-invalid" : "" }'>Tipo:</label>
+		<input class="form-control" type="number" id="tipo" name="tipo"
+			required value="${attraction.getTipoAtraccion()}"></input>
+		<div class="invalid-feedback">
+			<c:out value='${attraction.errors.get("tipo")}'></c:out>
+		</div>
+	</div>
+
+
 </div>
 <div>
 	<button type="submit" class="btn btn-primary">Guardar</button>

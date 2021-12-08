@@ -4,21 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Atraccion extends Ofertable {
-	private int idAtraccion;
+	private int id;
 	private String nombre;
 	private double costo;
 	private double tiempo;
 	protected int cupo;
-	private int tipo;
+	protected int tipo;
 	private Map<String, String> errors;
 
 	public Atraccion(int id, Object object, Object object2, Object object3, Object object4) {
-		this.idAtraccion = id;
+		this.id = id;
 
 	}
 
 	public Atraccion(int idAtraccion, String nombre, double costo, double tiempo, int cupo, int tipo) {
-		this.idAtraccion = idAtraccion;
+		this.id = idAtraccion;
+		this.nombre = nombre;
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupo = cupo;
+		this.tipo = tipo;
+	}
+
+	public Atraccion(String nombre, double costo, double tiempo, int cupo, int tipo) {
+
 		this.nombre = nombre;
 		this.costo = costo;
 		this.tiempo = tiempo;
@@ -47,6 +56,9 @@ public class Atraccion extends Ofertable {
 		if (cupo <= 0) {
 			errors.put("cupo", "Debe ser positivo");
 		}
+		if (tipo == 0) {
+			errors.put("tipo", "No puede ser 0");
+		}
 	}
 
 	@Override
@@ -57,6 +69,12 @@ public class Atraccion extends Ofertable {
 
 	public String getNombre() {
 		return this.nombre;
+	}
+
+	public void setId(int id) {
+		if (this.id == 0) {
+			this.id = id;
+		}
 	}
 
 	public int getCupo() {
@@ -104,7 +122,7 @@ public class Atraccion extends Ofertable {
 	@Override
 	public int getIdAtraccion() {
 
-		return idAtraccion;
+		return id;
 	}
 
 	public void setNombre(String nombre) {
@@ -141,6 +159,10 @@ public class Atraccion extends Ofertable {
 
 	public void host(int i) {
 		this.cupo -= i;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 }

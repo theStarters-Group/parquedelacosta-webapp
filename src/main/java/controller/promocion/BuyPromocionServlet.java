@@ -1,3 +1,4 @@
+package controller.promocion;
 //package controller.attractions;
 //
 //import java.io.IOException;
@@ -13,7 +14,7 @@
 //import persistence.UsuarioDAO;
 //import services.BuyAttractionService;
 //
-//@WebServlet("/buy.do")
+//@WebServlet("/promocion/buy.do")
 //public class BuyAttractionServlet extends HttpServlet {
 //
 //	private static final long serialVersionUID = 3455721046062278592L;

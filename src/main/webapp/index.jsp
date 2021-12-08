@@ -12,7 +12,7 @@
 	<section>
 		<c:if test="${user.isAdmin()}">
 			<div class="mb-3">
-				<a href="create.jsp" class="btn btn-primary btn-admin" role="button">
+				<a href="create.do" class="btn btn-primary btn-admin" role="button">
 					<i class="bi bi-plus-lg"></i> Crear Atracciones
 				</a>
 				<!-- 				<a href="" class="btn btn-primary btn-admin" role="button"> <i -->
@@ -34,6 +34,7 @@
 				Dinero:
 				<c:out value="${user.getDinero()}"></c:out>
 				<br>
+				<c:out value="${user}"></c:out>
 			</h4>
 		</div>
 
@@ -67,37 +68,46 @@
 					<th>Costo</th>
 					<th>Duracion</th>
 					<th>Cupo</th>
-
 					<th>Acciones</th>
-					<!-- 					<th>id</th> -->
+<!-- 					<th>id</th> -->
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${attractions}" var="attraction">
+				<c:forEach items="${ofertas}" var="oferta">
 					<tr>
-						<td><strong><c:out value="${attraction.nombre}"></c:out></strong>
+						<td><strong><c:out value="${oferta.nombre}"></c:out></strong>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Cras pretium eros urna. Sed quis erat congue, bibendum tortor
 								malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
-						<td><c:out value="${attraction.costo}"></c:out></td>
-						<td><c:out value="${attraction.tiempo}"></c:out></td>
-						<td><c:out value="${attraction.cupo}"></c:out></td>
-
-
-
+						<td><c:out value="${oferta.costo}"></c:out></td>
+						<td><c:out value="${oferta.tiempo}"></c:out></td>
+						<td><c:out value="${oferta.cupo}"></c:out></td>
 						<td><c:if test="${user.isAdmin()}">
-								<a href="edit.do?id=${attraction.idAtraccion}"
-									class="btn btn-light rounded-0" role="button"><i
-									class="bi bi-pencil-fill"></i></a>
-								<a href="delete.do?id=${attraction.idAtraccion}"
-									class="btn btn-danger rounded" role="button"><i
-									class="bi bi-x-circle-fill"></i></a>
+
+								<c:choose>
+									<c:when test="${oferta.esPromocion()}">
+
+										<a href="editPromo.do?id=${oferta.idPromo}"
+											class="btn btn-light rounded-0" role="button"><i
+											class="bi bi-pencil-fill"></i></a>
+										<a href="deletePromo.do?id=${oferta.idPromo}"
+											class="btn btn-danger rounded" role="button"><i
+											class="bi bi-x-circle-fill"></i></a>
+									</c:when>
+									<c:otherwise>
+										<a href="edit.do?id=${oferta.idAtraccion}"
+											class="btn btn-light rounded-0" role="button"><i
+											class="bi bi-pencil-fill"></i></a>
+										<a href="delete.do?id=${oferta.idAtraccion}"
+											class="btn btn-danger rounded" role="button"><i
+											class="bi bi-x-circle-fill"></i></a>
+									</c:otherwise>
+								</c:choose>
+
 							</c:if> <c:choose>
 
-								<c:when
-									test="${user.puedeComprar(attraction) && attraction.canHost(1)}">
-									<a
-										href="/turismo/attractions/buy.do?id=${attraction.idAtraccion}"
+								<c:when test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
+									<a href="buy.do?id=${oferta.idAtraccion}"
 										class="btn btn-success rounded" role="button">Comprar</a>
 								</c:when>
 								<c:otherwise>
@@ -105,35 +115,99 @@
 										role="button">No se puede comprar</a>
 								</c:otherwise>
 							</c:choose></td>
-						<%-- 						<td><c:out value="${attraction.idAtraccion}"></c:out></td> --%>
+						<td><c:out value="${attraction.idAtraccion}"></c:out></td>
 					</tr>
 				</c:forEach>
 			</tbody>
+
 		</table>
 
+
+		<!-- Tabla de atracciones funcionando -->
+
+
+
+
+		<!-- 		<table class="table table-stripped table-hover"> -->
+		<!-- 			<thead> -->
+		<!-- 				<tr> -->
+		<!-- 					<th>Atraccion</th> -->
+		<!-- 					<th>Costo</th> -->
+		<!-- 					<th>Duracion</th> -->
+		<!-- 					<th>Cupo</th> -->
+
+		<!-- 					<th>Acciones</th> -->
+		<!-- 					<th>id</th> -->
+		<!-- 					<th>tipo</th> -->
+		<!-- 				</tr> -->
+		<!-- 			</thead> -->
+		<!-- 			<tbody> -->
+		<%-- 				<c:forEach items="${attractions}" var="attraction"> --%>
+		<!-- 					<tr> -->
+		<%-- 						<td><strong><c:out value="${attraction.nombre}"></c:out></strong> --%>
+		<!-- 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+		<!-- 								Cras pretium eros urna. Sed quis erat congue, bibendum tortor -->
+		<!-- 								malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td> -->
+		<%-- 						<td><c:out value="${attraction.costo}"></c:out></td> --%>
+		<%-- 						<td><c:out value="${attraction.tiempo}"></c:out></td> --%>
+		<%-- 						<td><c:out value="${attraction.cupo}"></c:out></td> --%>
+
+
+
+		<%-- 						<td><c:if test="${user.isAdmin()}"> --%>
+		<%-- 								<a href="attractions/edit.do?id=${attraction.idAtraccion}" --%>
+		<!-- 									class="btn btn-light rounded-0" role="button"><i -->
+		<!-- 									class="bi bi-pencil-fill"></i></a> -->
+		<%-- 								<a href="attractions/delete.do?id=${attraction.idAtraccion}" --%>
+		<!-- 									class="btn btn-danger rounded" role="button"><i -->
+		<!-- 									class="bi bi-x-circle-fill"></i></a> -->
+		<%-- 							</c:if> <c:choose> --%>
+
+		<%-- 								<c:when --%>
+		<%-- 									test="${user.puedeComprar(attraction) && attraction.canHost(1)}"> --%>
+		<%-- 									<a href="attractions/buy.do?id=${attraction.idAtraccion}" --%>
+		<!-- 										class="btn btn-success rounded" role="button">Comprar</a> -->
+		<%-- 								</c:when> --%>
+		<%-- 								<c:otherwise> --%>
+		<!-- 									<a href="#" class="btn btn-secondary rounded disabled" -->
+		<!-- 										role="button">No se puede comprar</a> -->
+		<%-- 								</c:otherwise> --%>
+		<%-- 							</c:choose></td> --%>
+		<%-- 						<td><c:out value="${attraction.idAtraccion}"></c:out></td> --%>
+		<%-- 						<td><c:out value="${attraction.getTipoAtraccion()}"></c:out></td> --%>
+		<%-- 				</c:forEach> --%>
+		<!-- 			</tbody> -->
+		<!-- 		</table> -->
+
+
+
+
+
+
+
 		<!--Carousel por armar -->
-		<!-- 		<div id="carouselExample" class="carousel-slide" data-ride="carousel"> -->
-		<!-- 			<ol class="carousel-indicators"> -->
-		<!-- 				<li data-target="#carouselExample" data-slide-to="0" class="active"></li> -->
-		<!-- 				<li data-target="#carouselExample" data-slide-to="1"></li> -->
-		<!-- 			</ol> -->
-		<!-- 			<div class="carousel-inner"> -->
-		<!-- 				<div class="carousel-item active"> -->
-		<!-- 					<img src="img/boomerang.jpg" alt="..."> -->
+		<!-- 				<div id="carouselExample" class="carousel-slide" data-ride="carousel"> -->
+		<!-- 					<ol class="carousel-indicators"> -->
+		<!-- 						<li data-target="#carouselExample" data-slide-to="0" class="active"></li> -->
+		<!-- 						<li data-target="#carouselExample" data-slide-to="1"></li> -->
+		<!-- 					</ol> -->
+		<!-- 					<div class="carousel-inner"> -->
+		<!-- 						<div class="carousel-item active"> -->
+		<!-- 							<img src="img/boomerang.jpg" alt="..."> -->
+		<!-- 						</div> -->
+		<!-- 						<div class="carousel-item"> -->
+		<!-- 							<img src="img/vertigo_extremo.jpg" alt="..."> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 					<a href="#carouselExample" class="carousel-control-prev" -->
+		<!-- 						role="button" data-slide="prev"> <span -->
+		<!-- 						class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
+		<!-- 						class="visually-hidden">Anterior</span> -->
+		<!-- 					</a> <a href="#carouselExample" class="carousel-control-next" -->
+		<!-- 						role="button" data-slide="next"> <span -->
+		<!-- 						class="carousel-control-next-icon" aria-hidden="true"> </span> <span -->
+		<!-- 						class="visually-hidden">Siguiente</span></a> -->
 		<!-- 				</div> -->
-		<!-- 				<div class="carousel-item"> -->
-		<!-- 					<img src="img/vertigo_extremo.jpg" alt="..."> -->
-		<!-- 				</div> -->
-		<!-- 			</div> -->
-		<!-- 			<a href="#carouselExample" class="carousel-control-prev" -->
-		<!-- 				role="button" data-slide="prev"> <span -->
-		<!-- 				class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
-		<!-- 				class="visually-hidden">Anterior</span> -->
-		<!-- 			</a> <a href="#carouselExample" class="carousel-control-next" -->
-		<!-- 				role="button" data-slide="next"> <span -->
-		<!-- 				class="carousel-control-next-icon" aria-hidden="true"> </span> <span -->
-		<!-- 				class="visually-hidden">Siguiente</span></a> -->
-		<!-- 		</div> -->
 
 
 

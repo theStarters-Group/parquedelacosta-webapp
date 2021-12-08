@@ -1,38 +1,41 @@
 package model;
 
+import java.util.Arrays;
+
 public class Promocion extends Ofertable {
+
 	protected int tipoPromo;
 	protected int tipoAtraccion;
-	protected String nombrePromocion;
+	protected String nombre;
 	protected Atraccion[] atraccionesEnPromocion;
 	protected double datoExtra;
 	protected String atracciones;
 	protected double costo;
-	protected int idPromo;
+	protected int id;
 	protected int cupo;
+	protected double tiempo;
 	protected String[] atraccionesPromo;
 
 	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
 			Atraccion[] atraccionesEnPromocion) {
 		super();
 		this.tipoPromo = tipoPromo;
-		this.idPromo = idPromo;
-		this.nombrePromocion = nombrePromocion;
+		this.id = idPromo;
+		this.nombre = nombrePromocion;
 		this.atraccionesEnPromocion = atraccionesEnPromocion;
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
 	}
 
 	public double calcularDuracion(Atraccion[] atraccionesEnPromocion) {
-		double duracionPromo = 0;
 		for (int i = 0; i < atraccionesEnPromocion.length; i++) {
-			duracionPromo += atraccionesEnPromocion[i].getTiempo();
+			this.tiempo += atraccionesEnPromocion[i].getTiempo();
 		}
-		return duracionPromo;
+		return this.tiempo;
 	}
 
 	public Promocion(String nombrePromocion) {
-		this.nombrePromocion = nombrePromocion;
+		this.nombre = nombrePromocion;
 	}
 
 	public double calcularCosto(double datoExtra) {
@@ -53,6 +56,11 @@ public class Promocion extends Ofertable {
 		}
 
 		return costo;
+	}
+
+	public boolean esPromocion() {
+		return this instanceof Promocion;
+
 	}
 
 	public double sumaPrecio(Atraccion[] atraccionesPromo) {
@@ -102,12 +110,11 @@ public class Promocion extends Ofertable {
 		return this.tipoAtraccion;
 	}
 
-	@Override
-	public boolean hayCupo() {
+	public boolean canHost(int x) {
 		int i = 0;
 		boolean hayCupo = true;
 		while (i < this.getAtraccionesEnPromocion().length) {
-			if (getAtraccionesEnPromocion()[i].hayCupo())
+			if (getAtraccionesEnPromocion()[i].canHost(x))
 				i++;
 			else {
 				hayCupo = false;
@@ -124,7 +131,7 @@ public class Promocion extends Ofertable {
 	}
 
 	public String getNombre() {
-		return this.nombrePromocion;
+		return this.nombre;
 	}
 
 	public double getCosto() {
@@ -142,7 +149,7 @@ public class Promocion extends Ofertable {
 	@Override
 	public int getIdPromo() {
 		// TODO Auto-generated method stub
-		return this.idPromo;
+		return this.id;
 	}
 
 	@Override
@@ -157,4 +164,20 @@ public class Promocion extends Ofertable {
 
 	}
 
+	public void host(int i) {
+		this.cupo -= i;
+	}
+
+	@Override
+	public String toString() {
+		return "Promocion [idPromo=" + id + ", tipoPromo=" + tipoPromo + ", nombrePromocion=" + nombre
+				+ ", atraccionesEnPromocion=" + Arrays.toString(atraccionesEnPromocion) + ", costo=" + costo + ", cupo="
+				+ cupo + ", datoExtra=" + datoExtra + "]";
+	}
+
+	@Override
+	public boolean hayCupo() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

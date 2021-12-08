@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import utils.Crypt;
 
@@ -103,8 +104,18 @@ public class Usuario {
 				&& !oferta.contenidoEn(atraccionComprada);
 	}
 
+	public boolean puedeComprar(Ofertable oferta, List<Atraccion> atraccionComprada) {
+
+		return this.dinero >= oferta.getCosto() && this.tiempo >= oferta.getTiempo() && oferta.getCupo() > 0
+				&& !oferta.contenidoEn(atraccionComprada);
+	}
+
 	public LinkedList<Ofertable> getItinerario() {
 		return itinerario;
+	}
+
+	public boolean puedeComprar(Ofertable oferta) {
+		return oferta.getCosto() <= this.dinero && oferta.getTiempo() <= this.tiempo;
 	}
 
 	public boolean puedeComprar(Atraccion attraction) {
@@ -128,10 +139,15 @@ public class Usuario {
 		return false;
 	}
 
+//	public boolean checkPassword(String password) {
+////		String hashed = Crypt.hash(this.password);
+//		return Crypt.match(password, this.password);
+//	}
 	public boolean checkPassword(String password) {
 		String hashed = Crypt.hash(this.password);
 		return Crypt.match(password, hashed);
 	}
+
 
 	public void imprimirItinerario(LinkedList<Ofertable> itinerario, String file) throws IOException {
 

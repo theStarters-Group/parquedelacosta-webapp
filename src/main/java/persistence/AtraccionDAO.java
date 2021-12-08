@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import persistence.commons.ConnectionProvider;
@@ -14,18 +15,20 @@ import model.Ofertable;
 public class AtraccionDAO {
 
 	public int insert(Atraccion atraccion) throws SQLException {
-		String sql = "INSERT INTO atracciones (id, nombre, precio, duracion, cupo, id_tipo_atraccion) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO atracciones ( nombre, precio, duracion, cupo, id_tipo_atraccion) VALUES ( ?, ?, ?, ?, ?)";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setInt(1, atraccion.getIdAtraccion());
-		statement.setString(2, atraccion.getNombre());
-		statement.setDouble(3, atraccion.getCosto());
-		statement.setDouble(4, atraccion.getTiempo());
-		statement.setDouble(5, atraccion.getCupo());
-		statement.setDouble(6, atraccion.getTipoAtraccion());
+		statement.setString(1, atraccion.getNombre());
+		statement.setDouble(2, atraccion.getCosto());
+		statement.setDouble(3, atraccion.getTiempo());
+		statement.setDouble(4, atraccion.getCupo());
+		statement.setDouble(5, atraccion.getTipoAtraccion());
 
 		int rows = statement.executeUpdate();
+		ResultSet rs = statement.getGeneratedKeys();
+		rs.next();
+		atraccion.setId(rs.getInt(1));
 
 		return rows;
 	}
@@ -61,7 +64,7 @@ public class AtraccionDAO {
 
 	public int update(Atraccion attraction) {
 		try {
-			String sql = "UPDATE atracciones SET nombre = ?, precio = ?, duracion = ?, cupo = ? WHERE ID = ?";
+			String sql = "UPDATE atracciones SET nombre = ?, precio = ?, duracion = ?, cupo = ?, id_tipo_atraccion=? WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -70,7 +73,9 @@ public class AtraccionDAO {
 			statement.setDouble(i++, attraction.getCosto());
 			statement.setDouble(i++, attraction.getTiempo());
 			statement.setInt(i++, attraction.getCupo());
+			statement.setInt(i++, attraction.getTipoAtraccion());
 			statement.setInt(i++, attraction.getIdAtraccion());
+
 			int rows = statement.executeUpdate();
 
 			return rows;

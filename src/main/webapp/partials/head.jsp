@@ -15,7 +15,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 
-<link rel="shortcut icon" href="/turismo/assets/favicon.ico">
+<link rel="shortcut icon" href="ParqueDeLaCosta/assets/Parque_de_la_Costa.ico">
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
