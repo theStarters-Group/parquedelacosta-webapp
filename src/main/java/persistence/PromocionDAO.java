@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import persistence.commons.ConnectionProvider;
+import persistence.commons.MissingDataException;
 import model.Atraccion;
 import model.Promocion;
 
@@ -76,24 +77,95 @@ public class PromocionDAO {
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
 				resultados.getDouble(5), atraccionesEnPromo);
 	}
+	private Promocion toPromocion2(ResultSet resultados) throws SQLException {
+		String[] s = resultados.getString(6).split(" ");
+		Atraccion[] atraccionesEnPromo = new Atraccion[s.length];
+		AtraccionDAO atraccionDAO=new AtraccionDAO();
+		List<Atraccion> atracciones= atraccionDAO.findAll();
+		for (int i = 0; i < s.length; i++) {
+
+			for (Atraccion atraccion : atracciones) {
+				if (atraccion.getIdAtraccion() == Integer.parseInt(s[i])) {
+					atraccionesEnPromo[i] = atraccion;
+				}
+			}
+		}
+
+		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
+				resultados.getDouble(5), atraccionesEnPromo);
+	}
 
 	public Promocion find(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			String sql = "SELECT * FROM promociones WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+
+			ResultSet resultados = statement.executeQuery();
+
+			Promocion promocion = null;
+			if (resultados.next()) {
+				promocion = toPromocion2(resultados);
+			}
+
+			return promocion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
-	public void delete(Promocion promocion) {
-		// TODO Auto-generated method stub
+	public int delete(Promocion promocion) {
+		try {
+			String sql = "SET habilitado=? FROM atracciones WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			int i = 1;
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(i++, 0);
+			statement.setInt(1, promocion.getIdPromo());
+			int rows = statement.executeUpdate();
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}}
+
+	public int update(Promocion promocion) {
+		try {
+			String sql = "UPDATE promociones SET nombre = ?, datoExtra = ?, id_tipo_promocion = ? WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			int i = 1;
+			statement.setString(i++, promocion.getNombre());
+			statement.setInt(i++, promocion.getTipoPromocion());
+			statement.setInt(i++, promocion.getIdPromo());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 		
 	}
 
-	public void update(Promocion promocion) {
-		// TODO Auto-generated method stub
-		
-	}
+	public int insert(Promocion promocion) throws SQLException {
+		String sql = "INSERT INTO atracciones (nombre, precio, duracion, cupo, id_tipo_promocion) VALUES ( ?, ?, ?, ?, ?)";
+		Connection conn = ConnectionProvider.getConnection();
 
-	public void insert(Promocion promocion) {
-		// TODO Auto-generated method stub
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, promocion.getNombre());
+		statement.setDouble(2, promocion.getCosto());
+		statement.setDouble(3, promocion.getTiempo());
+		statement.setDouble(4, promocion.getCupo());
+		statement.setDouble(5, promocion.getTipoPromocion());
+
+		int rows = statement.executeUpdate();
+		ResultSet rs = statement.getGeneratedKeys();
+		rs.next();
+		promocion.setId(rs.getInt(1));
+
+		return rows;
 		
 	}
 }

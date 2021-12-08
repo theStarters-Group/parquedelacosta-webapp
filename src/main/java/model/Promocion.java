@@ -197,4 +197,11 @@ public class Promocion extends Ofertable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public int getTipoPromocion() {
+		return this.tipoPromo;
+	}
+	public void setId(int id) {
+		this.id=id;
+		
+	}
 }
