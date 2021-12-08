@@ -147,12 +147,6 @@ public class Atraccion extends Ofertable {
 		return 0;
 	}
 
-	@Override
-	public void actualizarCupo(Atraccion[] atraccionesEnPromocion) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public boolean canHost(int i) {
 		return cupo >= i;
 	}

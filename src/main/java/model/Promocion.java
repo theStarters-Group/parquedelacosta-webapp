@@ -26,6 +26,19 @@ public class Promocion extends Ofertable {
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
 	}
+	public Promocion( String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
+			Atraccion[] atraccionesEnPromocion) {
+		super();
+		this.tipoPromo = tipoPromo;
+		this.nombre = nombrePromocion;
+		this.atraccionesEnPromocion = atraccionesEnPromocion;
+		this.tipoAtraccion = tipoAtraccion;
+		this.costo = this.calcularCosto(datoExtra);
+	}
+	public Promocion (int id, Object object, Object object2, Object object3, Object object4) {
+		this.id = id;
+
+	}
 
 	public double calcularDuracion(Atraccion[] atraccionesEnPromocion) {
 		for (int i = 0; i < atraccionesEnPromocion.length; i++) {
@@ -88,8 +101,8 @@ public class Promocion extends Ofertable {
 		return cupo;
 	}
 
-	public void actualizarCupo(Atraccion[] atraccionesEnPromocion) {
-
+	public void actualizarCupo() {
+		Atraccion[] atraccionesEnPromocion = this.atraccionesEnPromocion;
 		for (int i = 0; i < atraccionesEnPromocion.length; i++) {
 			atraccionesEnPromocion[i].actualizarCupo();
 		}
@@ -157,12 +170,17 @@ public class Promocion extends Ofertable {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public void actualizarCupo() {
-		// TODO Auto-generated method stub
-
+	
+	public void setTipoPromo(int tipoPromo) {
+		this.tipoPromo = tipoPromo;
 	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setDatoExtra(double datoExtra) {
+		this.datoExtra = datoExtra;
+	}
+
 
 	public void host(int i) {
 		this.cupo -= i;
@@ -175,8 +193,7 @@ public class Promocion extends Ofertable {
 				+ cupo + ", datoExtra=" + datoExtra + "]";
 	}
 
-	@Override
-	public boolean hayCupo() {
+	public boolean isValid() {
 		// TODO Auto-generated method stub
 		return false;
 	}

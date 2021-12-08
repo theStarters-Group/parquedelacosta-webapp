@@ -9,26 +9,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
+import model.Promocion;
 import services.AttractionService;
+import services.PromocionService;
 
 @WebServlet("/editPromo.do")
 public class EditPromocionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7598291131560345626L;
-	private AttractionService attractionService;
+	private PromocionService promocionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.attractionService = new AttractionService();
+		this.promocionService = new PromocionService();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 
-		Atraccion attraction = attractionService.find(id);
-		req.setAttribute("attraction", attraction);
+		Promocion promocion = promocionService.find(id);
+		req.setAttribute("promocion", promocion);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editPromo.jsp");
 		dispatcher.forward(req, resp);
@@ -38,18 +40,14 @@ public class EditPromocionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
-		Double cost = Double.parseDouble(req.getParameter("cost"));
-//		Double cost = req.getParameter("cost").trim() == "" ? null : Double.parseDouble(req.getParameter("cost"));
-		Double duration = Double.parseDouble(req.getParameter("duration"));
-		Integer capacity = Integer.parseInt(req.getParameter("capacity"));
 		Integer tipo = Integer.parseInt(req.getParameter("tipo"));
+		Double datoExtra = Double.parseDouble(req.getParameter("datoExtra"));
+		Promocion promocion = promocionService.update(id, name, tipo, datoExtra);
 
-		Atraccion attraction = attractionService.update(id, name, cost, duration, capacity, tipo);
-
-		if (attraction.isValid()) {
+		if (promocion.isValid()) {
 			resp.sendRedirect("index.do");
 		} else {
-			req.setAttribute("attraction", attraction);
+			req.setAttribute("promocion", promocion);
 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editPromo.jsp");
 			dispatcher.forward(req, resp);

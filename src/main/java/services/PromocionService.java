@@ -12,58 +12,46 @@ import persistence.PromocionDAO;
 
 public class PromocionService {
 
-	public List<Ofertable> list() throws SQLException {
-		List<Ofertable> ofertas = new LinkedList<Ofertable>();
+	public Promocion create(String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
+			Atraccion[] atraccionesEnPromocion) throws SQLException {
+
+		Promocion promocion = new Promocion(nombrePromocion, tipoPromo, tipoAtraccion, datoExtra, atraccionesEnPromocion);
+		if (promocion.isValid()) {
+			PromocionDAO promocionDAO = new PromocionDAO();
+			promocionDAO.insert(promocion);
+			// XXX: si no devuelve "1", es que hubo más errores
+		}
+
+		return promocion;
+	}
+
+	public Promocion update(int id, String name, Integer tipo, Double datoExtra) {
 		PromocionDAO promocionDAO = new PromocionDAO();
-		AtraccionDAO atraccionDAO = new AtraccionDAO();
-		List<Atraccion> atracciones = atraccionDAO.findAll();
-		List<Promocion> promociones = promocionDAO.findAll(atracciones);
+		Promocion promocion = promocionDAO.find(id);
 
-		ofertas.addAll(promociones);
-		ofertas.addAll(atracciones);
-		return ofertas;
-	}
-
-	public Atraccion create(Integer id, String name, double cost, double duration, int capacity) throws SQLException {
-
-		Atraccion attraction = new Atraccion(id, name, cost, duration, capacity);
-
-		if (attraction.isValid()) {
-			AtraccionDAO attractionDAO = new AtraccionDAO();
-			attractionDAO.insert(attraction);
+		promocion.setNombre(name);
+	    promocion.setDatoExtra(datoExtra);
+	    promocion.setTipoPromo(tipo);
+		if (promocion.isValid()) {
+			promocionDAO.update(promocion);
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 
-		return attraction;
-	}
-
-	public Atraccion update(int id, String name, double cost, double duration, int capacity) {
-		AtraccionDAO atraccionDAO = new AtraccionDAO();
-		Atraccion attraction = atraccionDAO.find(id);
-
-		attraction.setNombre(name);
-		attraction.setCosto(cost);
-		attraction.setTiempo(duration);
-		attraction.setCupo(capacity);
-
-		if (attraction.isValid()) {
-			atraccionDAO.update(attraction);
-			// XXX: si no devuelve "1", es que hubo más errores
-		}
-
-		return attraction;
+		return promocion;
 	}
 
 	public void delete(int id) {
-		AtraccionDAO atraccionDAO = new AtraccionDAO();
-		Atraccion attraction = new Atraccion(id, null, null, null, null);
+		PromocionDAO promocionDAO = new PromocionDAO();
+		Promocion promocion = new Promocion(id, null, null, null, null);
 
-		atraccionDAO.delete(attraction);
+		promocionDAO.delete(promocion);
 	}
 
-	public Atraccion find(int id) {
-		AtraccionDAO atraccionDAO = new AtraccionDAO();
-		return atraccionDAO.find(id);
+	public Promocion find(int id) {
+		PromocionDAO promocionDAO = new PromocionDAO();
+		return promocionDAO.find(id);
 	}
+
+	
 
 }

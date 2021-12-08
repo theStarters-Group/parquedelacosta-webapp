@@ -76,4 +76,24 @@ public class PromocionDAO {
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
 				resultados.getDouble(5), atraccionesEnPromo);
 	}
+
+	public Promocion find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(Promocion promocion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(Promocion promocion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void insert(Promocion promocion) {
+		// TODO Auto-generated method stub
+		
+	}
 }

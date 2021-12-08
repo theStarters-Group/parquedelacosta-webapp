@@ -118,16 +118,13 @@ public class Usuario {
 		return oferta.getCosto() <= this.dinero && oferta.getTiempo() <= this.tiempo;
 	}
 
-	public boolean puedeComprar(Atraccion attraction) {
-		return attraction.getCosto() <= this.dinero && attraction.getTiempo() <= this.tiempo;
+
+	public boolean canAfford(Ofertable oferta) {
+		return oferta.getCosto() <= this.dinero;
 	}
 
-	public boolean canAfford(Atraccion attraction) {
-		return attraction.getCosto() <= this.dinero;
-	}
-
-	public boolean canAttend(Atraccion attraction) {
-		return attraction.getTiempo() <= this.tiempo;
+	public boolean canAttend(Ofertable oferta) {
+		return oferta.getTiempo() <= this.tiempo;
 	}
 
 	public Boolean isAdmin() {
@@ -161,9 +158,9 @@ public class Usuario {
 
 	}
 
-	public void addToItinerary(Atraccion attraction) {
-		this.dinero -= attraction.getCosto();
-		this.tiempo -= attraction.getTiempo();
+	public void addToItinerary(Ofertable oferta) {
+		this.dinero -= oferta.getCosto();
+		this.tiempo -= oferta.getTiempo();
 		// TODO agregar a su lista
 	}
 
