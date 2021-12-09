@@ -16,6 +16,18 @@ public class Itinerario {
 
 	}
 
+	public Itinerario(int idUsuario, int idPromo) {
+		super();
+		this.idPromocion=idPromo;
+		this.idUsuario=idUsuario;
+	}
+	public Itinerario(Integer idUsuario, int idAtraccion) {
+		super();
+		this.idUsuario = idUsuario;
+		this.idAtraccion = idAtraccion;
+	}
+
+
 	public int getIdUsuario() {
 		return idUsuario;
 	}

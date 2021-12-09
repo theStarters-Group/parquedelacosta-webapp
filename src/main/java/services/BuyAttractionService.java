@@ -4,8 +4,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import model.Atraccion;
+import model.Itinerario;
 import model.Usuario;
 import persistence.AtraccionDAO;
+import persistence.ItinerarioDAO;
 import persistence.UsuarioDAO;
 
 public class BuyAttractionService {
@@ -32,10 +34,11 @@ public class BuyAttractionService {
 		if (errors.isEmpty()) {
 			user.addToItinerary(attraction);
 			attraction.actualizarCupo(1);
-
-			// no grabamos para no afectar la base de pruebas
-			//attractionDAO.update(attraction);
-			//userDAO.update(user);
+			ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
+			Itinerario itinerario= new Itinerario(user.getIdUsuario(), attraction.getIdAtraccion());
+			attractionDAO.update(attraction);
+			userDAO.update(user);
+			itinerarioDAO.update(itinerario);
 		}
 
 		return errors;

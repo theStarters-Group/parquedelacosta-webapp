@@ -36,14 +36,12 @@ public class BuyPromocionService {
 		if (errors.isEmpty()) {
 			user.addToItinerary(promocion);
 			promocion.actualizarCupo();
-//
-//			ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
-//			Itinerario itinerario;
-//			itinerario.add(promocion);
-			// no grabamos para no afectar la base de pruebas
-//	promocionDAO.update(promocion);
-//			userDAO.update(user);
-//			itinerarioDAO.update(itinerario);
+
+			ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
+			Itinerario itinerario= new Itinerario(user.getIdUsuario(), promocion.getIdPromo());
+			promocionDAO.update(promocion);
+			userDAO.update(user);
+			itinerarioDAO.update(itinerario);
 		}
 
 		return errors;
