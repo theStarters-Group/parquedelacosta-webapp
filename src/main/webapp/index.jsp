@@ -22,19 +22,17 @@
 		</c:if>
 		<div class="container">
 			<h1>
-				¡Bienvenido,
+				Bienvenido,
 				<c:out value="${user.nombre}"></c:out>
 				!
 			</h1>
 			<h4>
-				Tu contraseña es:
-				<c:out value="${user.password}"></c:out>
+
 				Tiempo:
 				<c:out value="${user.getTiempo()}"></c:out>
 				Dinero:
 				<c:out value="${user.getDinero()}"></c:out>
 				<br>
-				<c:out value="${user}"></c:out>
 			</h4>
 		</div>
 
@@ -69,60 +67,120 @@
 					<th>Duracion</th>
 					<th>Cupo</th>
 					<th>Acciones</th>
-<!-- 					<th>id</th> -->
+					<!-- 					<th>deshabilitado?</th> -->
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${ofertas}" var="oferta">
 					<tr>
-						<td><strong><c:out value="${oferta.nombre}"></c:out></strong>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Cras pretium eros urna. Sed quis erat congue, bibendum tortor
-								malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
-						<td><c:out value="${oferta.costo}"></c:out></td>
-						<td><c:out value="${oferta.tiempo}"></c:out></td>
-						<td><c:out value="${oferta.cupo}"></c:out></td>
-						<td><c:if test="${user.isAdmin()}">
 
-								<c:choose>
-									<c:when test="${oferta.esPromocion()}">
+						<c:if test="${!oferta.estaDeshabilitado()}">
 
-										<a href="editPromo.do?id=${oferta.idPromo}"
-											class="btn btn-light rounded-0" role="button"><i
-											class="bi bi-pencil-fill"></i></a>
-										<a href="deletePromo.do?id=${oferta.idPromo}"
-											class="btn btn-danger rounded" role="button"><i
-											class="bi bi-x-circle-fill"></i></a>
+
+							<td><strong><c:out value="${oferta.nombre}"></c:out></strong>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Cras pretium eros urna. Sed quis erat congue, bibendum tortor
+									malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
+							<td><c:out value="${oferta.costo}"></c:out></td>
+							<td><c:out value="${oferta.tiempo}"></c:out></td>
+							<td><c:out value="${oferta.cupo}"></c:out></td>
+							<td><c:if test="${user.isAdmin()}">
+
+									<c:choose>
+										<c:when test="${oferta.esPromocion()}">
+
+											<a href="editPromo.do?id=${oferta.idPromo}"
+												class="btn btn-warning" role="button"><i
+												class="bi bi-pencil-fill"></i></a>
+											<a href="deletePromo.do?id=${oferta.idPromo}"
+												class="btn btn-danger rounded" role="button"><i
+												class="bi bi-x-circle-fill"></i></a>
+										</c:when>
+										<c:otherwise>
+											<a href="edit.do?id=${oferta.idAtraccion}"
+												class="btn btn-warning" role="button"><i
+												class="bi bi-pencil-fill"></i></a>
+											<a href="delete.do?id=${oferta.idAtraccion}"
+												class="btn btn-danger rounded" role="button"><i
+												class="bi bi-x-circle-fill"></i></a>
+										</c:otherwise>
+									</c:choose>
+
+								</c:if> <c:choose>
+
+									<c:when
+										test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
+										<a href="buy.do?id=${oferta.idAtraccion}"
+											class="btn btn-success rounded" role="button">Comprar</a>
 									</c:when>
 									<c:otherwise>
-										<a href="edit.do?id=${oferta.idAtraccion}"
-											class="btn btn-light rounded-0" role="button"><i
-											class="bi bi-pencil-fill"></i></a>
-										<a href="delete.do?id=${oferta.idAtraccion}"
-											class="btn btn-danger rounded" role="button"><i
-											class="bi bi-x-circle-fill"></i></a>
+										<a href="#" class="btn btn-secondary rounded disabled"
+											role="button">No se puede comprar</a>
 									</c:otherwise>
-								</c:choose>
-
-							</c:if> <c:choose>
-
-								<c:when test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
-									<a href="buy.do?id=${oferta.idAtraccion}"
-										class="btn btn-success rounded" role="button">Comprar</a>
-								</c:when>
-								<c:otherwise>
-									<a href="#" class="btn btn-secondary rounded disabled"
-										role="button">No se puede comprar</a>
-								</c:otherwise>
-							</c:choose></td>
-						<td><c:out value="${attraction.idAtraccion}"></c:out></td>
+								</c:choose></td>
+							<%-- 							<td><c:out value="${oferta.estaDeshabilitado()}"></c:out></td> --%>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
 
 		</table>
+		<c:if test="${user.isAdmin()}">
+			<h1>Estas son las atracciones Deshabilitadas de Parque de la
+				Costa</h1>
+			<table class="table table-stripped table-hover">
+				<thead>
+					<tr>
+						<th>Atraccion</th>
+						<th>Costo</th>
+						<th>Duracion</th>
+						<th>Cupo</th>
+						<th>Acciones</th>
+						<th>deshabilitado?</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${ofertas}" var="oferta">
+						<tr>
+							<c:if test="${oferta.estaDeshabilitado()}">
+								<td><strong><c:out value="${oferta.nombre}"></c:out></strong>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Cras pretium eros urna. Sed quis erat congue, bibendum tortor
+										malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
+								<td><c:out value="${oferta.costo}"></c:out></td>
+								<td><c:out value="${oferta.tiempo}"></c:out></td>
+								<td><c:out value="${oferta.cupo}"></c:out></td>
+								<td><c:if test="${user.isAdmin()}">
 
+										<c:choose>
+											<c:when test="${oferta.esPromocion()}">
 
+												<a href="editPromo.do?id=${oferta.idPromo}"
+													class="btn btn-warning" role="button"><i
+													class="bi bi-pencil-square"></i></a>
+												<a href="habilitePromo.do?id=${oferta.idPromo}"
+													class="btn btn-success rounded" role="button"><i
+													class="bi bi-check-circle-fill"></i></a>
+											</c:when>
+											<c:otherwise>
+												<a href="edit.do?id=${oferta.idAtraccion}"
+													class="btn btn-warning" role="button"><i
+													class="bi bi-pencil-fill"></i></a>
+												<a href="habilite.do?id=${oferta.idAtraccion}"
+													class="btn btn-success rounded" role="button"><i
+													class="bi bi-check-circle-fill"></i></a>
+											</c:otherwise>
+										</c:choose>
+
+									</c:if>
+								<td><c:out value="${oferta.estaDeshabilitado()}"></c:out></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</tbody>
+
+			</table>
+		</c:if>
 		<!-- Tabla de atracciones funcionando -->
 
 

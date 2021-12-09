@@ -85,7 +85,7 @@ public class Usuario {
 		this.dinero -= oferta.getCosto();
 		this.tiempo -= oferta.getTiempo();
 		if (oferta.esPromocion()) {
-			oferta.actualizarCupo(oferta.getAtraccionesEnPromocion());
+//			oferta.actualizarCupo(oferta.getAtraccionesEnPromocion());
 
 			for (int l = 0; l < oferta.getAtraccionesEnPromocion().length; l++) {
 				atraccionComprada.putIfAbsent(oferta.getAtraccionesEnPromocion()[l], "0");

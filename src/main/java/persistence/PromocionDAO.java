@@ -77,6 +77,7 @@ public class PromocionDAO {
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
 				resultados.getDouble(5), atraccionesEnPromo);
 	}
+
 	private Promocion toPromocion2(ResultSet resultados) throws SQLException {
 		String[] s = resultados.getString(6).split(" ");
 		Atraccion[] atraccionesEnPromo = new Atraccion[s.length];
@@ -115,19 +116,31 @@ public class PromocionDAO {
 		}
 	}
 
-	public int delete(Promocion promocion) {
+	public int habilite(Promocion promocion) {
 		try {
-			String sql = "SET habilitado=? FROM promociones WHERE ID = ?";
+			String sql = "UPDATE promociones SET deshabilitado=0 WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
-			int i = 1;
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(i++, 0);
 			statement.setInt(1, promocion.getIdPromo());
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
-		}}
+		}
+	}
+
+	public int delete(Promocion promocion) {
+		try {
+			String sql = "UPDATE promociones SET deshabilitado=1 WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, promocion.getIdPromo());
+			int rows = statement.executeUpdate();
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 
 	public int update(Promocion promocion) {
 		try {
@@ -146,7 +159,7 @@ public class PromocionDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-		
+
 	}
 
 	public int insert(Promocion promocion) throws SQLException {
@@ -166,6 +179,6 @@ public class PromocionDAO {
 		promocion.setId(rs.getInt(1));
 
 		return rows;
-		
+
 	}
 }

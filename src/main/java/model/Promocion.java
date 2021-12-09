@@ -16,6 +16,7 @@ public class Promocion extends Ofertable {
 	protected int id;
 	protected int cupo;
 	protected double tiempo;
+	protected boolean estado;
 	protected String[] atraccionesPromo;
 	private Map<String, String> errors;
 
@@ -29,7 +30,8 @@ public class Promocion extends Ofertable {
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
 	}
-	public Promocion( String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
+
+	public Promocion(String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
 			Atraccion[] atraccionesEnPromocion) {
 		super();
 		this.tipoPromo = tipoPromo;
@@ -38,9 +40,22 @@ public class Promocion extends Ofertable {
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
 	}
-	public Promocion (int id, Object object, Object object2, Object object3, Object object4) {
+
+	public Promocion(int id, Object object, Object object2, Object object3, Object object4) {
 		this.id = id;
 
+	}
+
+	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
+			Atraccion[] atraccionesEnPromocion, boolean estado) {
+		super();
+		this.tipoPromo = tipoPromo;
+		this.id = idPromo;
+		this.nombre = nombrePromocion;
+		this.atraccionesEnPromocion = atraccionesEnPromocion;
+		this.tipoAtraccion = tipoAtraccion;
+		this.costo = this.calcularCosto(datoExtra);
+		this.estado = estado;
 	}
 
 	public double calcularDuracion(Atraccion[] atraccionesEnPromocion) {
@@ -52,6 +67,18 @@ public class Promocion extends Ofertable {
 
 	public Promocion(String nombrePromocion) {
 		this.nombre = nombrePromocion;
+	}
+
+	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
+			boolean estado, Atraccion[] atraccionesEnPromocion) {
+		super();
+		this.tipoPromo = tipoPromo;
+		this.id = idPromo;
+		this.nombre = nombrePromocion;
+		this.atraccionesEnPromocion = atraccionesEnPromocion;
+		this.tipoAtraccion = tipoAtraccion;
+		this.costo = this.calcularCosto(datoExtra);
+		this.estado = estado;
 	}
 
 	public double calcularCosto(double datoExtra) {
@@ -171,17 +198,18 @@ public class Promocion extends Ofertable {
 	public int getIdAtraccion() {
 		return 0;
 	}
-	
+
 	public void setTipoPromo(int tipoPromo) {
 		this.tipoPromo = tipoPromo;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public void setDatoExtra(double datoExtra) {
 		this.datoExtra = datoExtra;
 	}
-
 
 	public void host(int i) {
 		this.cupo -= i;
@@ -218,20 +246,27 @@ public class Promocion extends Ofertable {
 		if (datoExtra == 0) {
 			errors.put("Tipo de descuento", "No puede ser 0");
 		}
-		if (atraccionesEnPromocion.length==0) {
+		if (atraccionesEnPromocion.length == 0) {
 			errors.put("Atracciones en promoción", "No pueden ser 0");
 		}
-		
+
 	}
+
 	public int getTipoPromocion() {
 		return this.tipoPromo;
 	}
+
 	public void setId(int id) {
-		this.id=id;
-		
+		this.id = id;
+
 	}
+
 	@Override
 	public boolean hayCupo() {
 		return false;
+	}
+
+	public boolean estaDeshabilitado() {
+		return estado;
 	}
 }

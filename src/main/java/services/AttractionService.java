@@ -55,5 +55,11 @@ public class AttractionService {
 		AtraccionDAO atraccionDAO = new AtraccionDAO();
 		return atraccionDAO.find(id);
 	}
+	public void habilite(int id) {
+		AtraccionDAO atraccionDAO = new AtraccionDAO();
+		Atraccion attraction = new Atraccion(id, null, null, null, null);
+
+		atraccionDAO.habilite(attraction);
+	}
 
 }

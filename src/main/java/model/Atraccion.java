@@ -10,6 +10,7 @@ public class Atraccion extends Ofertable {
 	private double tiempo;
 	protected int cupo;
 	protected int tipo;
+	protected boolean estado;
 	private Map<String, String> errors;
 
 	public Atraccion(int id, Object object, Object object2, Object object3, Object object4) {
@@ -35,6 +36,16 @@ public class Atraccion extends Ofertable {
 		this.tipo = tipo;
 	}
 
+	public Atraccion(int idAtraccion, String nombre, double costo, double tiempo, int cupo, int tipo, boolean estado) {
+		this.id = idAtraccion;
+		this.nombre = nombre;
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupo = cupo;
+		this.tipo = tipo;
+		this.estado = estado;
+	}
+
 	public boolean isValid() {
 		validate();
 		return errors.isEmpty();
@@ -46,7 +57,6 @@ public class Atraccion extends Ofertable {
 
 	public void validate() {
 		errors = new HashMap<String, String>();
-
 		if (costo <= 0) {
 			errors.put("costo", "Debe ser positivo");
 		}
@@ -59,6 +69,9 @@ public class Atraccion extends Ofertable {
 		if (tipo == 0) {
 			errors.put("tipo", "No puede ser 0");
 		}
+//		if(nombre == ?) {
+//			errors.put("nombre", "Ya existe una atraccion con este nombre")
+//			}
 	}
 
 	@Override
@@ -157,6 +170,10 @@ public class Atraccion extends Ofertable {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	public boolean estaDeshabilitado() {
+		return estado;
 	}
 
 }

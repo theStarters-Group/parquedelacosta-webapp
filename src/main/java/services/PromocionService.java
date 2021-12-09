@@ -1,11 +1,7 @@
 package services;
 
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-
 import model.Atraccion;
-import model.Ofertable;
 import model.Promocion;
 import persistence.AtraccionDAO;
 import persistence.PromocionDAO;
@@ -15,7 +11,8 @@ public class PromocionService {
 	public Promocion create(String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
 			Atraccion[] atraccionesEnPromocion) throws SQLException {
 
-		Promocion promocion = new Promocion(nombrePromocion, tipoPromo, tipoAtraccion, datoExtra, atraccionesEnPromocion);
+		Promocion promocion = new Promocion(nombrePromocion, tipoPromo, tipoAtraccion, datoExtra,
+				atraccionesEnPromocion);
 		if (promocion.isValid()) {
 			PromocionDAO promocionDAO = new PromocionDAO();
 			promocionDAO.insert(promocion);
@@ -30,8 +27,8 @@ public class PromocionService {
 		Promocion promocion = promocionDAO.find(id);
 
 		promocion.setNombre(name);
-	    promocion.setDatoExtra(datoExtra);
-	    promocion.setTipoPromo(tipo);
+		promocion.setDatoExtra(datoExtra);
+		promocion.setTipoPromo(tipo);
 		if (promocion.isValid()) {
 			promocionDAO.update(promocion);
 			// XXX: si no devuelve "1", es que hubo más errores
@@ -47,11 +44,15 @@ public class PromocionService {
 		promocionDAO.delete(promocion);
 	}
 
+	public void habilite(int id) {
+		AtraccionDAO atraccionDAO = new AtraccionDAO();
+		Atraccion attraction = new Atraccion(id, null, null, null, null);
+
+		atraccionDAO.habilite(attraction);
+	}
+
 	public Promocion find(int id) {
 		PromocionDAO promocionDAO = new PromocionDAO();
 		return promocionDAO.find(id);
 	}
-
-	
-
 }
