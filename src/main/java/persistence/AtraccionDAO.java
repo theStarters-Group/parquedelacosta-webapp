@@ -11,6 +11,7 @@ import persistence.commons.ConnectionProvider;
 import persistence.commons.MissingDataException;
 import model.Atraccion;
 import model.Ofertable;
+import model.Promocion;
 
 public class AtraccionDAO {
 
@@ -86,10 +87,11 @@ public class AtraccionDAO {
 
 	public int delete(Atraccion attraction) {
 		try {
-			String sql = "DELETE FROM atracciones WHERE ID = ?";
+			String sql = "SET habilitado=? FROM atracciones WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
-
+			int i = 1;
 			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(i++, 0);
 			statement.setInt(1, attraction.getIdAtraccion());
 			int rows = statement.executeUpdate();
 

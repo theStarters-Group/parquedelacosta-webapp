@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Promocion extends Ofertable {
 
@@ -15,6 +17,7 @@ public class Promocion extends Ofertable {
 	protected int cupo;
 	protected double tiempo;
 	protected String[] atraccionesPromo;
+	private Map<String, String> errors;
 
 	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
 			Atraccion[] atraccionesEnPromocion) {
@@ -161,13 +164,11 @@ public class Promocion extends Ofertable {
 
 	@Override
 	public int getIdPromo() {
-		// TODO Auto-generated method stub
 		return this.id;
 	}
 
 	@Override
 	public int getIdAtraccion() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	
@@ -194,8 +195,33 @@ public class Promocion extends Ofertable {
 	}
 
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+		validate();
+		return errors.isEmpty();
+	}
+
+	public Map<String, String> getErrors() {
+		return errors;
+	}
+
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (nombre == null) {
+			errors.put("Nombre", "No puede ser nulo");
+		}
+		if (1 <= tipoPromo && tipoPromo <= 4) {
+			errors.put("Tipo de promoción", "Debe ser un número entre 1 y 4");
+		}
+		if (tipoAtraccion <= 0) {
+			errors.put("Tipo de Atracción", "Debe ser un número entre 1 y 4");
+		}
+		if (datoExtra == 0) {
+			errors.put("Tipo de descuento", "No puede ser 0");
+		}
+		if (atraccionesEnPromocion.length==0) {
+			errors.put("Atracciones en promoción", "No pueden ser 0");
+		}
+		
 	}
 	public int getTipoPromocion() {
 		return this.tipoPromo;
@@ -203,5 +229,9 @@ public class Promocion extends Ofertable {
 	public void setId(int id) {
 		this.id=id;
 		
+	}
+	@Override
+	public boolean hayCupo() {
+		return false;
 	}
 }

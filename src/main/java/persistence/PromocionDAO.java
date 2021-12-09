@@ -117,7 +117,7 @@ public class PromocionDAO {
 
 	public int delete(Promocion promocion) {
 		try {
-			String sql = "SET habilitado=? FROM atracciones WHERE ID = ?";
+			String sql = "SET habilitado=? FROM promociones WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			int i = 1;
 			PreparedStatement statement = conn.prepareStatement(sql);
