@@ -46,6 +46,15 @@ public class Atraccion extends Ofertable {
 		this.estado = estado;
 	}
 
+//	public Atraccion(String nombre, double costo, double tiempo, int cupo, int tipo, boolean estado) {
+//		this.nombre = nombre;
+//		this.costo = costo;
+//		this.tiempo = tiempo;
+//		this.cupo = cupo;
+//		this.tipo = tipo;
+//		this.estado = estado;
+//	}
+
 	public boolean isValid() {
 		validate();
 		return errors.isEmpty();

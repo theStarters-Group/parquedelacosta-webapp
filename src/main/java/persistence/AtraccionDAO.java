@@ -15,7 +15,7 @@ import model.Ofertable;
 public class AtraccionDAO {
 
 	public int insert(Atraccion atraccion) throws SQLException {
-		String sql = "INSERT INTO atracciones ( nombre, precio, duracion, cupo, id_tipo_atraccion) VALUES ( ?, ?, ?, ?, ?,?)";
+		String sql = "INSERT INTO atracciones ( nombre, precio, duracion, cupo, id_tipo_atraccion,deshabilitado) VALUES ( ?, ?, ?, ?, ?,?)";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);

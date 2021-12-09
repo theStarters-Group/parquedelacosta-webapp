@@ -39,6 +39,7 @@ public class CreateAttractionServlet extends HttpServlet {
 		Double duration = Double.parseDouble(req.getParameter("duration"));
 		Integer capacity = Integer.parseInt(req.getParameter("capacity"));
 		Integer tipo = Integer.parseInt(req.getParameter("tipo"));
+//		Boolean estado = Boolean.parseBoolean(req.getParameter("estado"));
 
 		Atraccion attraction;
 		try {
