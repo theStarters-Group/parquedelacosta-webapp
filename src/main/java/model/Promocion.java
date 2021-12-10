@@ -17,6 +17,7 @@ public class Promocion extends Ofertable {
 	protected int cupo;
 	protected double tiempo;
 	protected boolean estado;
+	protected String imagen;
 	protected String[] atraccionesPromo;
 	private Map<String, String> errors;
 
@@ -175,6 +176,10 @@ public class Promocion extends Ofertable {
 
 	public String getNombre() {
 		return this.nombre;
+	}
+
+	public String getImagen() {
+		return this.imagen;
 	}
 
 	public double getCosto() {

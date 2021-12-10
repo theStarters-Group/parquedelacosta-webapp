@@ -1,5 +1,6 @@
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="en">
 <head>
 <jsp:include page="partials/head.jsp"></jsp:include>
@@ -81,7 +82,12 @@
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 									Cras pretium eros urna. Sed quis erat congue, bibendum tortor
 									malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
-							<td><c:out value="${oferta.costo}"></c:out></td>
+
+
+							<%-- 							<td><c:out value="${oferta.costo}"></c:out></td> --%>
+
+							<td><fmt:formatNumber type="number" maxFractionDigits="3"
+									value="${oferta.costo}" /></td>
 							<td><c:out value="${oferta.tiempo}"></c:out></td>
 							<td><c:out value="${oferta.cupo}"></c:out></td>
 							<td><c:if test="${user.isAdmin()}">
@@ -147,7 +153,8 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 										Cras pretium eros urna. Sed quis erat congue, bibendum tortor
 										malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
-								<td><c:out value="${oferta.costo}"></c:out></td>
+								<td><fmt:formatNumber type="number" maxFractionDigits="3"
+										value="${oferta.costo}" /></td>
 								<td><c:out value="${oferta.tiempo}"></c:out></td>
 								<td><c:out value="${oferta.cupo}"></c:out></td>
 								<td><c:if test="${user.isAdmin()}">
@@ -243,29 +250,7 @@
 
 
 
-		<!--Carousel por armar -->
-		<!-- 				<div id="carouselExample" class="carousel-slide" data-ride="carousel"> -->
-		<!-- 					<ol class="carousel-indicators"> -->
-		<!-- 						<li data-target="#carouselExample" data-slide-to="0" class="active"></li> -->
-		<!-- 						<li data-target="#carouselExample" data-slide-to="1"></li> -->
-		<!-- 					</ol> -->
-		<!-- 					<div class="carousel-inner"> -->
-		<!-- 						<div class="carousel-item active"> -->
-		<!-- 							<img src="img/boomerang.jpg" alt="..."> -->
-		<!-- 						</div> -->
-		<!-- 						<div class="carousel-item"> -->
-		<!-- 							<img src="img/vertigo_extremo.jpg" alt="..."> -->
-		<!-- 						</div> -->
-		<!-- 					</div> -->
-		<!-- 					<a href="#carouselExample" class="carousel-control-prev" -->
-		<!-- 						role="button" data-slide="prev"> <span -->
-		<!-- 						class="carousel-control-prev-icon" aria-hidden="true"></span> <span -->
-		<!-- 						class="visually-hidden">Anterior</span> -->
-		<!-- 					</a> <a href="#carouselExample" class="carousel-control-next" -->
-		<!-- 						role="button" data-slide="next"> <span -->
-		<!-- 						class="carousel-control-next-icon" aria-hidden="true"> </span> <span -->
-		<!-- 						class="visually-hidden">Siguiente</span></a> -->
-		<!-- 				</div> -->
+
 
 
 

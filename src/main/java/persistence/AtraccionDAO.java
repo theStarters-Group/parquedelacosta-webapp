@@ -186,6 +186,7 @@ public class AtraccionDAO {
 
 	private static Atraccion toAtraccion(ResultSet resultados) throws SQLException {
 		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getDouble(3),
-				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6), resultados.getBoolean(7));
+				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6), resultados.getBoolean(7),
+				resultados.getString(8));
 	}
 }

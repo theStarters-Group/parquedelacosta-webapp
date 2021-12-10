@@ -11,6 +11,7 @@ public class Atraccion extends Ofertable {
 	protected int cupo;
 	protected int tipo;
 	protected boolean estado;
+	protected String imagen;
 	private Map<String, String> errors;
 
 	public Atraccion(int id, Object object, Object object2, Object object3, Object object4) {
@@ -55,6 +56,18 @@ public class Atraccion extends Ofertable {
 //		this.estado = estado;
 //	}
 
+	public Atraccion(int idAtraccion, String nombre, double costo, double tiempo, int cupo, int tipo, boolean estado,
+			String imagen) {
+		this.id = idAtraccion;
+		this.nombre = nombre;
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupo = cupo;
+		this.tipo = tipo;
+		this.estado = estado;
+		this.imagen = imagen;
+	}
+
 	public boolean isValid() {
 		validate();
 		return errors.isEmpty();
@@ -91,6 +104,9 @@ public class Atraccion extends Ofertable {
 
 	public String getNombre() {
 		return this.nombre;
+	}
+	public String getImagen() {
+		return this.imagen;
 	}
 
 	public void setId(int id) {

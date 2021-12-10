@@ -132,6 +132,20 @@ p {
 	object-fit: cover;
 }
 
+.container_carrousel {
+	width: 100%;
+	/* 	height: 20%; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.body_carrousel {
+	width: 55%;
+	margin-top: 30px;
+	margin-bottom: 80px;
+}
+
 .carousel-slide {
 	display: flex;
 	margin-top: 100px;
