@@ -71,7 +71,7 @@ public class Promocion extends Ofertable {
 	}
 
 	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
-			boolean estado, Atraccion[] atraccionesEnPromocion) {
+			boolean estado, String imagen, Atraccion[] atraccionesEnPromocion) {
 		super();
 		this.tipoPromo = tipoPromo;
 		this.id = idPromo;
@@ -80,6 +80,7 @@ public class Promocion extends Ofertable {
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
 		this.estado = estado;
+		this.imagen = imagen;
 	}
 
 	public double calcularCosto(double datoExtra) {

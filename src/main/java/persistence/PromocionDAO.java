@@ -61,8 +61,8 @@ public class PromocionDAO {
 		return total;
 	}
 
-	private Promocion toPromocion(ResultSet resultados, List<Atraccion> atracciones) throws SQLException {
-		String[] s = resultados.getString(6).split(" ");
+	public Promocion toPromocion(ResultSet resultados, List<Atraccion> atracciones) throws SQLException {
+		String[] s = resultados.getString(8).split(" ");
 		Atraccion[] atraccionesEnPromo = new Atraccion[s.length];
 
 		for (int i = 0; i < s.length; i++) {
@@ -75,14 +75,14 @@ public class PromocionDAO {
 		}
 
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
-				resultados.getDouble(5), atraccionesEnPromo);
+				resultados.getDouble(5), resultados.getBoolean(6), resultados.getString(7), atraccionesEnPromo);
 	}
 
-	private Promocion toPromocion2(ResultSet resultados) throws SQLException {
-		String[] s = resultados.getString(6).split(" ");
+	public Promocion toPromocion2(ResultSet resultados) throws SQLException {
+		String[] s = resultados.getString(8).split(" ");
 		Atraccion[] atraccionesEnPromo = new Atraccion[s.length];
-		AtraccionDAO atraccionDAO=new AtraccionDAO();
-		List<Atraccion> atracciones= atraccionDAO.findAll();
+		AtraccionDAO atraccionDAO = new AtraccionDAO();
+		List<Atraccion> atracciones = atraccionDAO.findAll();
 		for (int i = 0; i < s.length; i++) {
 
 			for (Atraccion atraccion : atracciones) {
@@ -93,7 +93,7 @@ public class PromocionDAO {
 		}
 
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
-				resultados.getDouble(5), atraccionesEnPromo);
+				resultados.getDouble(5), resultados.getBoolean(6), resultados.getString(7), atraccionesEnPromo);
 	}
 
 	public Promocion find(int id) {

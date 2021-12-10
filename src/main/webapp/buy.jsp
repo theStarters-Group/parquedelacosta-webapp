@@ -27,7 +27,7 @@
 
 						<c:forEach items="${ofertas}" var="oferta">
 							<c:if
-								test="${user.puedeComprar(oferta) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
+								test="${user.puedeComprar(oferta) && oferta.canHost(1) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
 								<div class="carousel-item">
 									<img src="${oferta.getImagen()}" class="d-block w-100 h-50"
 										alt="..">
@@ -77,7 +77,6 @@
 							<td><c:out value="${oferta.tiempo}"></c:out></td>
 							<td><c:out value="${oferta.cupo}"></c:out></td>
 							<td><c:choose>
-
 									<c:when
 										test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
 										<a href="buy.do?id=${oferta.idAtraccion}"
@@ -92,7 +91,6 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-
 		</table>
 	</section>
 	<jsp:include page="partials/footer.jsp"></jsp:include>

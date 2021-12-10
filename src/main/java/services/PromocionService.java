@@ -45,10 +45,10 @@ public class PromocionService {
 	}
 
 	public void habilite(int id) {
-		AtraccionDAO atraccionDAO = new AtraccionDAO();
-		Atraccion attraction = new Atraccion(id, null, null, null, null);
+		PromocionDAO promocionDAO = new PromocionDAO();
+		Promocion promocion = new Promocion(id, null, null, null, null);
 
-		atraccionDAO.habilite(attraction);
+		promocionDAO.habilite(promocion);
 	}
 
 	public Promocion find(int id) {
