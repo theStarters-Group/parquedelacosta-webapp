@@ -98,7 +98,9 @@ public class PromocionDAO {
 
 	public Promocion find(int id) {
 		try {
-			String sql = "SELECT * FROM promociones WHERE id = ?";
+			String sql = "SELECT promociones.*, group_concat(ap.id_atraccion, ' ') AS lista_atracciones\r\n"
+					+ "FROM promociones\r\n" + "join atracciones_promo ap on ap.id_promocion = promociones.id\r\n"
+					+ "WHERE id=?" + "GROUP BY promociones.id";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, id);

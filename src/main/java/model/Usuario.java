@@ -70,10 +70,7 @@ public class Usuario {
 		this.admin = admin;
 		this.password = password;
 	}
-//	public Usuario(int i, String string, String string2, double j, double k, int l, boolean b) {
-//		// TODO Auto-generated constructor stub
-//	}
-
+	
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", password=" + password + ", tiempo="
