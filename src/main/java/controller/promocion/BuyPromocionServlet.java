@@ -1,4 +1,5 @@
 package controller.promocion;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
@@ -43,15 +44,13 @@ public class BuyPromocionServlet extends HttpServlet {
 				req.setAttribute("errors", errors);
 				req.setAttribute("flash", "No ha podido realizarse la compra");
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promocion/index.do");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listBuy.do");
 			dispatcher.forward(req, resp);
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-
-		
 	}
 }

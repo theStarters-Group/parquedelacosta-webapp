@@ -45,7 +45,7 @@ public class BuyAttractionServlet extends HttpServlet {
 				req.setAttribute("flash", "No ha podido realizarse la compra");
 			}
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/attractions/index.do");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listBuy.do");
 			dispatcher.forward(req, resp);
 			
 			

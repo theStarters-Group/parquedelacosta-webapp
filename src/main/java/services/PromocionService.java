@@ -22,13 +22,13 @@ public class PromocionService {
 		return promocion;
 	}
 
-	public Promocion update(int id, String name, Integer tipo, Double datoExtra) {
+	public Promocion update(Integer id, String name, Integer tipoPromo, Double datoExtra) {
 		PromocionDAO promocionDAO = new PromocionDAO();
 		Promocion promocion = promocionDAO.find(id);
 
 		promocion.setNombre(name);
 		promocion.setDatoExtra(datoExtra);
-		promocion.setTipoPromo(tipo);
+		promocion.setTipoPromo(tipoPromo);
 		if (promocion.isValid()) {
 			promocionDAO.update(promocion);
 			// XXX: si no devuelve "1", es que hubo más errores

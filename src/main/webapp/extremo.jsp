@@ -16,7 +16,7 @@
 					<div class="card-body">
 						<h4 class="card-title">Vertigo Xtremo</h4>
 						<p class="card-text">Altura maxima requerida 1,30 M Peso
-							máximo por vuelo 385kgs Horarios de Operación DE VUELOS de 10 a
+							maximo por vuelo 385kgs Horarios de Operacion DE VUELOS de 10 a
 							19hs</p>
 						<a href="https://youtu.be/xi8eMOrHP9c"
 							class="btn btn-primary btn-atracciones">Ver</a>
@@ -26,8 +26,8 @@
 					<img class="card-img-top" src="img/boomerang.jpg" alt="100px">
 					<div class="card-body">
 						<h4 class="card-title">Boomerang</h4>
-						<p class="card-text">Altura mínima requerida 1,20 M Menores
-							de 10 años aunque lleguen a la altura mínima requerida deberán
+						<p class="card-text">Altura minima requerida 1,20 M Menores
+							de 10 a�os aunque lleguen a la altura minima requerida deberan
 							subir con un adulto responsable directo.</p>
 						<a href="https://youtu.be/RGpQQOcGWqM"
 							class="btn btn-primary btn-atracciones">Ver</a>
@@ -49,7 +49,7 @@
 					<div class="card-body">
 						<h4 class="card-title">El desafio</h4>
 						<p class="card-text">Altura maxima requerida 1,30 M Menores de
-							10 a�os aunque lleguen a la altura mínima requerida deberán
+							10 a�os aunque lleguen a la altura minima requerida deberan
 							subir con un adulto responsable directo.</p>
 						<a href="https://youtu.be/lvgBYc96wS0"
 							class="btn btn-primary btn-atracciones">Ver</a>

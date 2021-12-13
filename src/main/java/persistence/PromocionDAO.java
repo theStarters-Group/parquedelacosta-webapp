@@ -62,7 +62,7 @@ public class PromocionDAO {
 	}
 
 	public Promocion toPromocion(ResultSet resultados, List<Atraccion> atracciones) throws SQLException {
-		String[] s = resultados.getString(8).split(" ");
+		String[] s = resultados.getString(9).split(" ");
 		Atraccion[] atraccionesEnPromo = new Atraccion[s.length];
 
 		for (int i = 0; i < s.length; i++) {
@@ -75,11 +75,12 @@ public class PromocionDAO {
 		}
 
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
-				resultados.getDouble(5), resultados.getBoolean(6), resultados.getString(7), atraccionesEnPromo);
+				resultados.getDouble(5), resultados.getBoolean(6), resultados.getString(7), resultados.getString(8),
+				atraccionesEnPromo);
 	}
 
 	public Promocion toPromocion2(ResultSet resultados) throws SQLException {
-		String[] s = resultados.getString(8).split(" ");
+		String[] s = resultados.getString(9).split(" ");
 		Atraccion[] atraccionesEnPromo = new Atraccion[s.length];
 		AtraccionDAO atraccionDAO = new AtraccionDAO();
 		List<Atraccion> atracciones = atraccionDAO.findAll();
@@ -93,10 +94,11 @@ public class PromocionDAO {
 		}
 
 		return new Promocion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getInt(4),
-				resultados.getDouble(5), resultados.getBoolean(6), resultados.getString(7), atraccionesEnPromo);
+				resultados.getDouble(5), resultados.getBoolean(6), resultados.getString(7), resultados.getString(8),
+				atraccionesEnPromo);
 	}
 
-	public Promocion find(int id) {
+	public Promocion find(Integer id) {
 		try {
 			String sql = "SELECT promociones.*, group_concat(ap.id_atraccion, ' ') AS lista_atracciones\r\n"
 					+ "FROM promociones\r\n" + "join atracciones_promo ap on ap.id_promocion = promociones.id\r\n"
@@ -146,14 +148,14 @@ public class PromocionDAO {
 
 	public int update(Promocion promocion) {
 		try {
-			String sql = "UPDATE promociones SET nombre = ?, datoExtra = ?, id_tipo_promocion = ? WHERE ID = ?";
+			String sql = "UPDATE promociones SET nombre = ?, id_tipo_promocion = ?, dato_extra = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
-
 			PreparedStatement statement = conn.prepareStatement(sql);
-			int i = 1;
-			statement.setString(i++, promocion.getNombre());
-			statement.setInt(i++, promocion.getTipoPromocion());
-			statement.setInt(i++, promocion.getIdPromo());
+
+			statement.setString(1, promocion.getNombre());
+			statement.setInt(2, promocion.getTipoPromocion());
+			statement.setDouble(3, promocion.getDatoExtra());
+			statement.setInt(4, promocion.getIdPromo());
 
 			int rows = statement.executeUpdate();
 
@@ -165,20 +167,22 @@ public class PromocionDAO {
 	}
 
 	public int insert(Promocion promocion) throws SQLException {
-		String sql = "INSERT INTO atracciones (nombre, precio, duracion, cupo, id_tipo_promocion) VALUES ( ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO promociones (nombre, id_tipo_promocion, id_tipo_atracciones, dato_extra) VALUES ( ?, ?, ?, ?)";
+//				+ "INSERT INTO atracciones_promo(id_promocion,id_atraccion) values("idPromo",5),(10,6),(10,7)"
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
+//		int i = 1;
 		statement.setString(1, promocion.getNombre());
-		statement.setDouble(2, promocion.getCosto());
-		statement.setDouble(3, promocion.getTiempo());
-		statement.setDouble(4, promocion.getCupo());
-		statement.setDouble(5, promocion.getTipoPromocion());
-
+		statement.setInt(2, promocion.getTipoPromocion());
+		statement.setInt(3, promocion.getTipoAtraccion());
+		statement.setDouble(4, promocion.getDatoExtra());
+		statement.setObject(5, promocion.getAtraccionesEnPromocion());
 		int rows = statement.executeUpdate();
 		ResultSet rs = statement.getGeneratedKeys();
 		rs.next();
-		promocion.setId(rs.getInt(1));
+		int idPromo = rs.getInt(1);
+		promocion.setId(idPromo);
 
 		return rows;
 

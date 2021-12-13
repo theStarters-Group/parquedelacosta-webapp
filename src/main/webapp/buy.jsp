@@ -49,6 +49,20 @@
 			</div>
 		</div>
 		<h2>Promociones y atracciones disponibles para vos.</h2>
+		<c:if test="${flash != null}">
+			<div class="alert alert-info">
+				<p>
+					<c:out value="${flash}" />
+					<c:if test="${errors != null}">
+						<ul>
+							<c:forEach items="${errors}" var="entry">
+								<li><c:out value="${entry.getValue()}"></c:out></li>
+							</c:forEach>
+						</ul>
+					</c:if>
+				</p>
+			</div>
+		</c:if>
 		<table class="table table-stripped table-hover">
 			<thead>
 				<tr>
@@ -69,24 +83,51 @@
 
 
 							<td><strong><c:out value="${oferta.nombre}"></c:out></strong>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Cras pretium eros urna. Sed quis erat congue, bibendum tortor
-									malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
+								<p>
+									<c:out value="${oferta.getDescripcion()}"></c:out>
+								</p></td>
 							<td><fmt:formatNumber type="number" maxFractionDigits="3"
 									value="${oferta.costo}" /></td>
-							<td><c:out value="${oferta.tiempo}"></c:out></td>
+							<td><c:out value="${oferta.getTiempo()}"></c:out></td>
 							<td><c:out value="${oferta.cupo}"></c:out></td>
 							<td><c:choose>
-									<c:when
-										test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
-										<a href="buy.do?id=${oferta.idAtraccion}"
-											class="btn btn-success rounded" role="button">Comprar</a>
+									<c:when test="${oferta.esPromocion()}">
+										<c:choose>
+											<c:when
+												test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
+												<a href="buyPromo.do?id=${oferta.idPromo}"
+													class="btn btn-success rounded" role="button"><i
+													class="bi bi-cart4"> Comprar</i></a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" class="btn btn-secondary rounded disabled"
+													role="button">No se puede comprar</a>
+											</c:otherwise>
+										</c:choose>
 									</c:when>
+
 									<c:otherwise>
-										<a href="#" class="btn btn-secondary rounded disabled"
-											role="button">No se puede comprar</a>
+										<c:choose>
+											<c:when
+												test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
+												<a href="buy.do?id=${oferta.idAtraccion}"
+													class="btn btn-success rounded" role="button"><i
+													class="bi bi-cart4"> Comprar</i></a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" class="btn btn-secondary rounded disabled"
+													role="button">No se puede comprar</a>
+											</c:otherwise>
+										</c:choose>
 									</c:otherwise>
-								</c:choose></td>
+
+
+
+								</c:choose> <%-- 								 <c:choose> --%> <%-- 									<c:when --%> <%-- 										test="${user.puedeComprar(oferta) && oferta.canHost(1)}"> --%>
+								<%-- 										<a href="buy.do?id=${oferta.idAtraccion}" --%> <!-- 											class="btn btn-success rounded" role="button">Comprar</a> -->
+								<%-- 									</c:when> --%> <%-- 									<c:otherwise> --%> <!-- 										<a href="#" class="btn btn-secondary rounded disabled" -->
+								<!-- 											role="button">No se puede comprar</a> --> <%-- 									</c:otherwise> --%>
+								<%-- 								</c:choose> --%></td>
 						</c:if>
 					</tr>
 				</c:forEach>

@@ -12,6 +12,7 @@ public abstract class Ofertable {
 	int cupo;
 	int id;
 	Atraccion[] atraccionesEnPromocion;
+	protected String descripcion;
 	public Object getAtraccionesEnPromocion;
 
 	public Atraccion[] getAtraccionesEnPromocion() {

@@ -37,11 +37,11 @@ public class BuyPromocionService {
 			user.addToItinerary(promocion);
 			promocion.actualizarCupo();
 
-			ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
-			Itinerario itinerario= new Itinerario(user.getIdUsuario(), promocion.getIdPromo());
+			ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+			Itinerario itinerario = new Itinerario(user.getIdUsuario(), promocion.getIdPromo(), 0);
 			promocionDAO.update(promocion);
 			userDAO.update(user);
-			itinerarioDAO.update(itinerario);
+			itinerarioDAO.insert(itinerario);
 		}
 
 		return errors;

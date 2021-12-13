@@ -11,19 +11,23 @@
 
 	<main class="container">
 		<section>
-			<c:if test="${attraction != null && !attraction.isValid()}">
+			<c:if test="${promocion != null && !promocion.isValid()}">
 				<div class="alert alert-danger">
 					<p>Se encontraron errores al actualizar la promocion.</p>
 				</div>
 			</c:if>
-			
-			<div class="bg-light p-4 mb-3 rounded">
-			<h1>Modificar promociones de Parque de la Costa</h1>
-		</div>
 
-			<form action="promocion/edit.do" method="post">
-				<input type="hidden" name="id" value="${oferta.idPromo}">
-				<jsp:include page="/form.jsp"></jsp:include>
+			<div class="bg-light p-4 mb-3 rounded">
+				<h1>Modificar promociones de Parque de la Costa</h1>
+				<h3>
+					<c:out value="${promocion}"></c:out>
+					<%-- 					<c:out value="${oferta}"></c:out> --%>
+				</h3>
+			</div>
+
+			<form action="editPromo.do" method="post">
+				<input type="hidden" name="id" value="${promocion.idPromo}">
+				<jsp:include page="/formPromo.jsp"></jsp:include>
 			</form>
 		</section>
 	</main>

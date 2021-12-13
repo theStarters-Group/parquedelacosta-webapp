@@ -7,40 +7,44 @@
 	</div>
 	<div class="mb-3">
 		<label for="tipoPromo"
-			class='col-form-label ${promocion.errors.get("tipoPromo") != null ? "is-invalid" : "" }'>Tipo de Promoción:</label>
-		<input class="form-control" type="number" id="tipoPromo" name="tipoPromo"
-			required value="${promocion.tipoPromo}"></input>
+			class='col-form-label ${promocion.errors.get("tipoPromo") != null ? "is-invalid" : "" }'>Tipo
+			de Promoción:</label> <input class="form-control" type="number"
+			id="tipoPromo" name="tipoPromo" required
+			value="${promocion.getTipoPromocion()}"></input>
 		<div class="invalid-feedback">
 			<c:out value='${promocion.errors.get("tipoPromo")}'></c:out>
 		</div>
 	</div>
 	<div class="mb-3">
 		<label for="datoExtra"
-			class='col-form-label ${promocion.errors.get("datoExtra") != null ? "is-invalid" : "" }'>Tipo de descuento:</label>
-		<input step="0.01" class="form-control" type="number" id="datoExtra"
-			name="duration" required value="${promocion.datoExtra}"></input>
+			class='col-form-label ${promocion.errors.get("datoExtra") != null ? "is-invalid" : "" }'>Tipo
+			de descuento:</label> <input step="0.01" class="form-control" type="number"
+			id="datoExtra" name="datoExtra" required
+			value="${promocion.getDatoExtra()}"></input>
 		<div class="invalid-feedback">
 			<c:out value='${promocion.errors.get("datoExtra")}'></c:out>
 		</div>
 	</div>
 	<div class="mb-3">
 		<label for="tipoAtraccion"
-			class='col-form-label ${promocion.errors.get("tipoAtraccion") != null ? "is-invalid" : "" }'>Tipo de Atraccion:</label>
-		<input class="form-control" type="number" id="tipoAtraccion"
-			name="tipoAtraccion" required value="${promocion.tipoAtraccion}"></input>
+			class='col-form-label ${promocion.errors.get("tipoAtraccion") != null ? "is-invalid" : "" }'>Tipo
+			de Atracciones:</label> <input class="form-control" type="number"
+			id="tipoAtraccion" name="tipoAtraccion" required
+			value="${promocion.getTipoAtraccion()}"></input>
 		<div class="invalid-feedback">
 			<c:out value='${promocion.errors.get("tipoAtraccion")}'></c:out>
 		</div>
 	</div>
-	<div class="mb-3">
-		<label for="atraccionesEnPromocion"
-			class='col-form-label ${promocion.errors.get("atraccionesEnPromocion")}'>Atracciones en promoción:</label>
-		<input class="form-control" type="text" id="atraccionesEnPromocion" name="atraccionesEnPromocion"
-			required value="${promocion.getAtraccionesEnPromocion()}"></input>
-		<div class="invalid-feedback">
-			<c:out value='${promocion.errors.get("atraccionesEnPromocion")}'></c:out>
+		<div class="mb-3">
+			<label for="atraccionesEnPromocion"
+				class='col-form-label ${promocion.errors.get("atraccionesEnPromocion")}'>Atracciones
+				en promoción:</label> <input class="form-control" type="text"
+				id="atraccionesEnPromocion" name="atraccionesEnPromocion" required
+				value="${promocion.getAtraccionesEnPromocion()}"></input>
+			<div class="invalid-feedback">
+				<c:out value='${promocion.errors.get("atraccionesEnPromocion")}'></c:out>
+			</div>
 		</div>
-	</div>
 
 
 </div>

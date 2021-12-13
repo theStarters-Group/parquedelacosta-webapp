@@ -25,13 +25,14 @@ public class ItinerarioDAO {
 	}
 
 	public int update(Itinerario itinerario) throws SQLException {
-		String sql = "UPDATE ITINERARIOS SET id_usuario = ? WHERE id_usuario = ?";
+		String sql = "UPDATE ITINERARIOS SET id_promocion = ?, id_atraccion=?,  WHERE id_usuario = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setInt(1, itinerario.getIdUsuario());
-		statement.setInt(2, itinerario.getIdPromocion());
-		statement.setInt(3, itinerario.getIdAtraccion());
+		// CHEQUEAR SI ESTÁ BIEN EL ORDEN
+		statement.setInt(1, itinerario.getIdPromocion());
+		statement.setInt(2, itinerario.getIdAtraccion());
+		statement.setInt(3, itinerario.getIdUsuario());
 		int rows = statement.executeUpdate();
 
 		return rows;
@@ -55,4 +56,24 @@ public class ItinerarioDAO {
 		return new Itinerario(resultados.getInt(1), resultados.getInt(2), resultados.getInt(3));
 	}
 
+	public void delete(Itinerario itinerario) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public List<Itinerario> findByUser(int idUsuario) throws SQLException {
+		String sql = "SELECT * FROM itinerarios WHERE id_usuario=?";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setInt(1, idUsuario);
+
+		ResultSet resultados = statement.executeQuery();
+
+		List<Itinerario> itinerarios = new LinkedList<Itinerario>();
+		while (resultados.next()) {
+			itinerarios.add(toItinerario(resultados));
+		}
+
+		return itinerarios;
+	}
 }

@@ -34,11 +34,11 @@ public class BuyAttractionService {
 		if (errors.isEmpty()) {
 			user.addToItinerary(attraction);
 			attraction.actualizarCupo(1);
-			ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
-			Itinerario itinerario= new Itinerario(user.getIdUsuario(), attraction.getIdAtraccion());
+			ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+			Itinerario itinerario = new Itinerario(user.getIdUsuario(), 0, attraction.getIdAtraccion());
 			attractionDAO.update(attraction);
 			userDAO.update(user);
-			itinerarioDAO.update(itinerario);
+			itinerarioDAO.insert(itinerario);
 		}
 
 		return errors;

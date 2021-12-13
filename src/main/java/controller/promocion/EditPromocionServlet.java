@@ -38,9 +38,11 @@ public class EditPromocionServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		Integer id = Integer.parseInt(req.getParameter("id"));
+		// String id = req.getParameter("id");
 		String name = req.getParameter("name");
-		Integer tipo = Integer.parseInt(req.getParameter("tipo"));
+		Integer tipo = Integer.parseInt(req.getParameter("tipoPromo"));
 		Double datoExtra = Double.parseDouble(req.getParameter("datoExtra"));
 		Promocion promocion = promocionService.update(id, name, tipo, datoExtra);
 

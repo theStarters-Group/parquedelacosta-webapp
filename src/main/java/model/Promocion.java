@@ -18,19 +18,9 @@ public class Promocion extends Ofertable {
 	protected double tiempo;
 	protected boolean estado;
 	protected String imagen;
+	protected String descripcion;
 	protected String[] atraccionesPromo;
 	private Map<String, String> errors;
-
-	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
-			Atraccion[] atraccionesEnPromocion) {
-		super();
-		this.tipoPromo = tipoPromo;
-		this.id = idPromo;
-		this.nombre = nombrePromocion;
-		this.atraccionesEnPromocion = atraccionesEnPromocion;
-		this.tipoAtraccion = tipoAtraccion;
-		this.costo = this.calcularCosto(datoExtra);
-	}
 
 	public Promocion(String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
 			Atraccion[] atraccionesEnPromocion) {
@@ -40,11 +30,18 @@ public class Promocion extends Ofertable {
 		this.atraccionesEnPromocion = atraccionesEnPromocion;
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
+		this.cupo = this.calcularCupo(atraccionesEnPromocion);
+		this.datoExtra = datoExtra;
 	}
 
+//No Borrar
 	public Promocion(int id, Object object, Object object2, Object object3, Object object4) {
 		this.id = id;
 
+	}
+
+	public Promocion(String nombrePromocion) {
+		this.nombre = nombrePromocion;
 	}
 
 	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
@@ -56,18 +53,9 @@ public class Promocion extends Ofertable {
 		this.atraccionesEnPromocion = atraccionesEnPromocion;
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
+		this.cupo = this.calcularCupo(atraccionesEnPromocion);
 		this.estado = estado;
-	}
-
-	public double calcularDuracion(Atraccion[] atraccionesEnPromocion) {
-		for (int i = 0; i < atraccionesEnPromocion.length; i++) {
-			this.tiempo += atraccionesEnPromocion[i].getTiempo();
-		}
-		return this.tiempo;
-	}
-
-	public Promocion(String nombrePromocion) {
-		this.nombre = nombrePromocion;
+		this.datoExtra = datoExtra;
 	}
 
 	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
@@ -79,8 +67,28 @@ public class Promocion extends Ofertable {
 		this.atraccionesEnPromocion = atraccionesEnPromocion;
 		this.tipoAtraccion = tipoAtraccion;
 		this.costo = this.calcularCosto(datoExtra);
+		this.cupo = this.calcularCupo(atraccionesEnPromocion);
 		this.estado = estado;
 		this.imagen = imagen;
+		this.datoExtra = datoExtra;
+
+	}
+
+	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
+			boolean estado, String imagen, String descripcion, Atraccion[] atraccionesEnPromocion) {
+		super();
+		this.tipoPromo = tipoPromo;
+		this.id = idPromo;
+		this.nombre = nombrePromocion;
+		this.atraccionesEnPromocion = atraccionesEnPromocion;
+		this.tipoAtraccion = tipoAtraccion;
+		this.costo = this.calcularCosto(datoExtra);
+		this.cupo = this.calcularCupo(atraccionesEnPromocion);
+		this.estado = estado;
+		this.imagen = imagen;
+		this.datoExtra = datoExtra;
+		this.descripcion = descripcion;
+
 	}
 
 	public double calcularCosto(double datoExtra) {
@@ -103,11 +111,6 @@ public class Promocion extends Ofertable {
 		return costo;
 	}
 
-	public boolean esPromocion() {
-		return this instanceof Promocion;
-
-	}
-
 	public double sumaPrecio(Atraccion[] atraccionesPromo) {
 		double precioTotal = 0;
 
@@ -125,12 +128,19 @@ public class Promocion extends Ofertable {
 		return tiempoTotal;
 	}
 
-	public int calcularCupo(Atraccion[] atraccionesEnPromocion) {
-		int cupo = 0;
+	public double calcularDuracion(Atraccion[] atraccionesEnPromocion) {
 		for (int i = 0; i < atraccionesEnPromocion.length; i++) {
-			cupo += atraccionesEnPromocion[i].getCupo();
+			this.tiempo += atraccionesEnPromocion[i].getTiempo();
 		}
-		return cupo;
+		return this.tiempo;
+	}
+
+	public int calcularCupo(Atraccion[] atraccionesEnPromocion) {
+//		int cupo = 0;
+		for (int i = 0; i < atraccionesEnPromocion.length; i++) {
+			this.cupo += atraccionesEnPromocion[i].getCupo();
+		}
+		return this.cupo;
 	}
 
 	public void actualizarCupo() {
@@ -155,24 +165,8 @@ public class Promocion extends Ofertable {
 		return this.tipoAtraccion;
 	}
 
-	public boolean canHost(int x) {
-		int i = 0;
-		boolean hayCupo = true;
-		while (i < this.getAtraccionesEnPromocion().length) {
-			if (getAtraccionesEnPromocion()[i].canHost(x))
-				i++;
-			else {
-				hayCupo = false;
-				break;
-			}
-		}
-		return hayCupo;
-	}
-
 	public int getCupo() {
-
-		return this.calcularCupo(this.atraccionesEnPromocion);
-
+		return this.cupo;
 	}
 
 	public String getNombre() {
@@ -185,6 +179,10 @@ public class Promocion extends Ofertable {
 
 	public double getCosto() {
 		return this.costo;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
 	public Atraccion[] getAtraccionesEnPromocion() {
@@ -200,9 +198,22 @@ public class Promocion extends Ofertable {
 		return this.id;
 	}
 
+	public double getDatoExtra() {
+		return this.datoExtra;
+	}
+
 	@Override
 	public int getIdAtraccion() {
 		return 0;
+	}
+
+	public int getTipoPromocion() {
+		return this.tipoPromo;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+
 	}
 
 	public void setTipoPromo(int tipoPromo) {
@@ -217,22 +228,6 @@ public class Promocion extends Ofertable {
 		this.datoExtra = datoExtra;
 	}
 
-	public void host(int i) {
-		this.cupo -= i;
-	}
-
-	@Override
-	public String toString() {
-		return "Promocion [idPromo=" + id + ", tipoPromo=" + tipoPromo + ", nombrePromocion=" + nombre
-				+ ", atraccionesEnPromocion=" + Arrays.toString(atraccionesEnPromocion) + ", costo=" + costo + ", cupo="
-				+ cupo + ", datoExtra=" + datoExtra + "]";
-	}
-
-	public boolean isValid() {
-		validate();
-		return errors.isEmpty();
-	}
-
 	public Map<String, String> getErrors() {
 		return errors;
 	}
@@ -243,27 +238,18 @@ public class Promocion extends Ofertable {
 		if (nombre == null) {
 			errors.put("Nombre", "No puede ser nulo");
 		}
-		if (1 <= tipoPromo && tipoPromo <= 4) {
-			errors.put("Tipo de promoción", "Debe ser un número entre 1 y 4");
+		if (tipoPromo < 1 || tipoPromo > 3) {
+			errors.put("Tipo de promoción", "Debe ser un número entre 1 y 3");
 		}
 		if (tipoAtraccion <= 0) {
 			errors.put("Tipo de Atracción", "Debe ser un número entre 1 y 4");
 		}
-		if (datoExtra == 0) {
+		if (datoExtra <= 0) {
 			errors.put("Tipo de descuento", "No puede ser 0");
 		}
 		if (atraccionesEnPromocion.length == 0) {
 			errors.put("Atracciones en promoción", "No pueden ser 0");
 		}
-
-	}
-
-	public int getTipoPromocion() {
-		return this.tipoPromo;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 
 	}
 
@@ -274,5 +260,40 @@ public class Promocion extends Ofertable {
 
 	public boolean estaDeshabilitado() {
 		return estado;
+	}
+
+	public void host(int i) {
+		this.cupo -= i;
+	}
+
+	public boolean canHost(int x) {
+		int i = 0;
+		boolean hayCupo = true;
+		while (i < this.getAtraccionesEnPromocion().length) {
+			if (getAtraccionesEnPromocion()[i].canHost(x))
+				i++;
+			else {
+				hayCupo = false;
+				break;
+			}
+		}
+		return hayCupo;
+	}
+
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+
+	public boolean esPromocion() {
+		return this instanceof Promocion;
+
+	}
+
+	@Override
+	public String toString() {
+		return "Promocion [id=" + id + ", nombre=" + nombre + ", tipoPromo=" + tipoPromo + ", datoExtra=" + datoExtra
+				+ ", atraccionesEnPromocion=" + Arrays.toString(atraccionesEnPromocion) + ", estado=" + estado
+				+ ", imagen=" + imagen + ", costo=" + costo + ", cupo=" + cupo + ", errors=" + errors + "]";
 	}
 }

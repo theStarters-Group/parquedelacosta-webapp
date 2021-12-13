@@ -34,22 +34,6 @@ public class AtraccionDAO {
 		return rows;
 	}
 
-//	public int insert2(Atraccion atraccion) throws SQLException {
-//		String sql = "INSERT INTO atracciones (id, nombre, precio, duracion, cupo, id_tipo_atraccion) VALUES (?, ?, ?, ?, ?)";
-//		Connection conn = ConnectionProvider.getConnection();
-//
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setInt(1, atraccion.getIdAtraccion());
-//		statement.setString(2, atraccion.getNombre());
-//		statement.setDouble(3, atraccion.getCosto());
-//		statement.setDouble(4, atraccion.getTiempo());
-//		statement.setDouble(5, atraccion.getCupo());
-//
-//		int rows = statement.executeUpdate();
-//
-//		return rows;
-//	}
-
 	public int updateCupo(Ofertable oferta) throws SQLException {
 		String sql = "UPDATE atracciones SET cupo = ? WHERE id = ?";
 		Connection conn = ConnectionProvider.getConnection();
@@ -187,6 +171,6 @@ public class AtraccionDAO {
 	private static Atraccion toAtraccion(ResultSet resultados) throws SQLException {
 		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getDouble(3),
 				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6), resultados.getBoolean(7),
-				resultados.getString(8));
+				resultados.getString(8), resultados.getString(9));
 	}
 }
