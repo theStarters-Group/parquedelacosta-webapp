@@ -25,11 +25,11 @@
 								class="d-block w-100 h-50" alt="..">
 						</div>
 
-						<c:forEach items="${ofertas}" var="oferta">
+						<c:forEach items="${paraComprar}" var="comprable">
 							<c:if
-								test="${user.puedeComprar(oferta) && oferta.canHost(1) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
+								test="${user.puedeComprar(comprable) && comprable.canHost(1) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
 								<div class="carousel-item">
-									<img src="${oferta.getImagen()}" class="d-block w-100 h-50"
+									<img src="${comprable.getImagen()}" class="d-block w-100 h-50"
 										alt="..">
 								</div>
 							</c:if>
@@ -75,27 +75,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${ofertas}" var="oferta">
+				<c:forEach items="${paraComprar}" var="comprable">
 					<tr>
 
 						<c:if
-							test="${!oferta.estaDeshabilitado() && user.puedeComprar(oferta)}">
+							test="${!comprable.estaDeshabilitado() && user.puedeComprar(comprable)}">
 
 
-							<td><strong><c:out value="${oferta.nombre}"></c:out></strong>
+							<td><strong><c:out value="${comprable.nombre}"></c:out></strong>
 								<p>
-									<c:out value="${oferta.getDescripcion()}"></c:out>
+									<c:out value="${comprable.getDescripcion()}"></c:out>
 								</p></td>
 							<td><fmt:formatNumber type="number" maxFractionDigits="3"
-									value="${oferta.costo}" /></td>
-							<td><c:out value="${oferta.getTiempo()}"></c:out></td>
-							<td><c:out value="${oferta.cupo}"></c:out></td>
+									value="${comprable.costo}" /></td>
+							<td><c:out value="${comprable.getTiempo()}"></c:out></td>
+							<td><c:out value="${comprable.cupo}"></c:out></td>
 							<td><c:choose>
-									<c:when test="${oferta.esPromocion()}">
+									<c:when test="${comprable.esPromocion()}">
 										<c:choose>
 											<c:when
-												test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
-												<a href="buyPromo.do?id=${oferta.idPromo}"
+												test="${user.puedeComprar(comprable) && comprable.canHost(1)}">
+												<a href="buyPromo.do?id=${comprable.idPromo}"
 													class="btn btn-success rounded" role="button"><i
 													class="bi bi-cart4"> Comprar</i></a>
 											</c:when>
@@ -109,8 +109,8 @@
 									<c:otherwise>
 										<c:choose>
 											<c:when
-												test="${user.puedeComprar(oferta) && oferta.canHost(1)}">
-												<a href="buy.do?id=${oferta.idAtraccion}"
+												test="${user.puedeComprar(comprable) && comprable.canHost(1)}">
+												<a href="buy.do?id=${comprable.idAtraccion}"
 													class="btn btn-success rounded" role="button"><i
 													class="bi bi-cart4"> Comprar</i></a>
 											</c:when>

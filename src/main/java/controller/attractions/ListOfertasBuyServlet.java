@@ -29,10 +29,10 @@ public class ListOfertasBuyServlet extends HttpServlet implements Servlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		List<Ofertable> ofertas;
+		List<Ofertable> paraComprar;
 		try {
-			ofertas = ofertaService.list();
-			req.setAttribute("ofertas", ofertas);
+			paraComprar = ofertaService.list();
+			req.setAttribute("paraComprar", paraComprar);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/buy.jsp");
 			dispatcher.forward(req, resp);
 		} catch (SQLException e) {

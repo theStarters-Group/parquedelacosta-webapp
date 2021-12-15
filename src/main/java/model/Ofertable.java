@@ -20,11 +20,11 @@ public abstract class Ofertable {
 	}
 
 	public double getTiempo() {
-		return tiempo;
+		return this.tiempo;
 	}
 
 	public double getCosto() {
-		return costo;
+		return this.costo;
 	}
 
 	public abstract int getCupo();

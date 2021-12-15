@@ -167,22 +167,31 @@ public class PromocionDAO {
 	}
 
 	public int insert(Promocion promocion) throws SQLException {
-		String sql = "INSERT INTO promociones (nombre, id_tipo_promocion, id_tipo_atracciones, dato_extra) VALUES ( ?, ?, ?, ?)";
-//				+ "INSERT INTO atracciones_promo(id_promocion,id_atraccion) values("idPromo",5),(10,6),(10,7)"
+		String sql = "INSERT INTO promociones (nombre, id_tipo_promocion, id_tipo_atracciones, dato_extra) VALUES ( ?, ?, ?, ?);";
+		String sql2 = "INSERT INTO atracciones_promo(id_promocion,id_atraccion) values(?,?);";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-//		int i = 1;
 		statement.setString(1, promocion.getNombre());
 		statement.setInt(2, promocion.getTipoPromocion());
 		statement.setInt(3, promocion.getTipoAtraccion());
 		statement.setDouble(4, promocion.getDatoExtra());
-		statement.setObject(5, promocion.getAtraccionesEnPromocion());
 		int rows = statement.executeUpdate();
 		ResultSet rs = statement.getGeneratedKeys();
 		rs.next();
 		int idPromo = rs.getInt(1);
 		promocion.setId(idPromo);
+
+		PreparedStatement statement2 = conn.prepareStatement(sql2);
+		Atraccion[] atraccionesPromo = promocion.getAtraccionesEnPromocion();
+
+		statement2.setObject(1, promocion.getIdPromo());
+
+		for (int i = 0; i < atraccionesPromo.length; i++) {
+			statement2.setObject(2, atraccionesPromo[i].getIdAtraccion());
+			@SuppressWarnings("unused")
+			int rows2 = statement2.executeUpdate();
+		}
 
 		return rows;
 

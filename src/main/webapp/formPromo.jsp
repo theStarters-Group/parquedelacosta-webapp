@@ -35,16 +35,16 @@
 			<c:out value='${promocion.errors.get("tipoAtraccion")}'></c:out>
 		</div>
 	</div>
-		<div class="mb-3">
-			<label for="atraccionesEnPromocion"
-				class='col-form-label ${promocion.errors.get("atraccionesEnPromocion")}'>Atracciones
-				en promoción:</label> <input class="form-control" type="text"
-				id="atraccionesEnPromocion" name="atraccionesEnPromocion" required
-				value="${promocion.getAtraccionesEnPromocion()}"></input>
-			<div class="invalid-feedback">
-				<c:out value='${promocion.errors.get("atraccionesEnPromocion")}'></c:out>
-			</div>
+	<div class="mb-3">
+		<label for="atraccionesEnPromocion"
+			class='col-form-label ${promocion.errors.get("atraccionesEnPromocion")}'>Atracciones
+			en promoción:</label> <input class="form-control" type="text"
+			id="atraccionesEnPromocion" name="atraccionesEnPromocion" required
+			value="${promocion.atraccionesEnPromocion}"></input>
+		<div class="invalid-feedback">
+			<c:out value='${promocion.errors.get("atraccionesEnPromocion")}'></c:out>
 		</div>
+	</div>
 
 
 </div>
