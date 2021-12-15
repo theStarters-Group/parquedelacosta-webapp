@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class Promocion extends Ofertable {
 	protected boolean estado;
 	protected String imagen;
 	protected String descripcion;
-	protected String[] atraccionesPromo;
+	protected String atraccionesEnPromo;
 	private Map<String, String> errors;
 
 	public Promocion(String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
@@ -32,6 +31,8 @@ public class Promocion extends Ofertable {
 		this.costo = this.calcularCosto(datoExtra);
 		this.cupo = this.calcularCupo(atraccionesEnPromocion);
 		this.datoExtra = datoExtra;
+		this.atraccionesEnPromo = atraccionesEnPromocion.toString();
+
 	}
 
 //No Borrar
@@ -56,6 +57,7 @@ public class Promocion extends Ofertable {
 		this.cupo = this.calcularCupo(atraccionesEnPromocion);
 		this.estado = estado;
 		this.datoExtra = datoExtra;
+		this.atraccionesEnPromo = atraccionesEnPromocion.toString();
 	}
 
 	public Promocion(int idPromo, String nombrePromocion, int tipoPromo, int tipoAtraccion, double datoExtra,
@@ -71,6 +73,7 @@ public class Promocion extends Ofertable {
 		this.estado = estado;
 		this.imagen = imagen;
 		this.datoExtra = datoExtra;
+		this.atraccionesEnPromo = atraccionesEnPromocion.toString();
 
 	}
 
@@ -88,6 +91,7 @@ public class Promocion extends Ofertable {
 		this.imagen = imagen;
 		this.datoExtra = datoExtra;
 		this.descripcion = descripcion;
+		this.atraccionesEnPromo = this.convertirATexto();
 
 	}
 
@@ -189,8 +193,18 @@ public class Promocion extends Ofertable {
 		return this.atraccionesEnPromocion;
 	}
 
-	public String getAtracciones() {
-		return this.atracciones;
+	public String convertirATexto() {
+		String convertido = "";
+		for (int i = 0; i < this.atraccionesEnPromocion.length; i++) {
+			int texto = this.atraccionesEnPromocion[i].getIdAtraccion();
+			convertido += Integer.toString(texto) +" ";
+
+		}
+		return convertido;
+	}
+
+	public String getAtraccionesEnPromo() {
+		return this.atraccionesEnPromo;
 	}
 
 	@Override
@@ -292,8 +306,10 @@ public class Promocion extends Ofertable {
 
 	@Override
 	public String toString() {
-		return "Promocion [id=" + id + ", nombre=" + nombre + ", tipoPromo=" + tipoPromo + ", datoExtra=" + datoExtra
-				+ ", atraccionesEnPromocion=" + Arrays.toString(atraccionesEnPromocion) + ", estado=" + estado
-				+ ", imagen=" + imagen + ", costo=" + costo + ", cupo=" + cupo + ", errors=" + errors + "]";
+		return "Promocion [id=" + id + ", nombre=" + nombre + ", tipoPromo=" + tipoPromo + ", tipoAtraccion="
+				+ tipoAtraccion + ", datoExtra=" + datoExtra + ", atraccionesEnPromo=" + atraccionesEnPromo + ", costo="
+				+ costo + ", cupo=" + cupo + ", tiempo=" + tiempo + ", descripcion=" + descripcion + ", estado="
+				+ estado + ", imagen=" + imagen + ", errors=" + errors + "]";
 	}
+
 }

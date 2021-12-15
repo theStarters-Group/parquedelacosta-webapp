@@ -49,7 +49,7 @@ public class AtraccionDAO {
 
 	public int update(Atraccion attraction) {
 		try {
-			String sql = "UPDATE atracciones SET nombre = ?, precio = ?, duracion = ?, cupo = ?, id_tipo_atraccion=? WHERE ID = ?";
+			String sql = "UPDATE atracciones SET nombre = ?, precio = ?, duracion = ?, cupo = ?, id_tipo_atraccion=?,descripcion=? WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -59,6 +59,7 @@ public class AtraccionDAO {
 			statement.setDouble(i++, attraction.getTiempo());
 			statement.setInt(i++, attraction.getCupo());
 			statement.setInt(i++, attraction.getTipoAtraccion());
+			statement.setString(i++, attraction.getDescripcion());
 			statement.setInt(i++, attraction.getIdAtraccion());
 
 			int rows = statement.executeUpdate();

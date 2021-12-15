@@ -40,7 +40,7 @@
 			class='col-form-label ${promocion.errors.get("atraccionesEnPromocion")}'>Atracciones
 			en promoción:</label> <input class="form-control" type="text"
 			id="atraccionesEnPromocion" name="atraccionesEnPromocion" required
-			value="${promocion.atraccionesEnPromocion}"></input>
+			value="${promocion.convertirATexto()}"></input>
 		<div class="invalid-feedback">
 			<c:out value='${promocion.errors.get("atraccionesEnPromocion")}'></c:out>
 		</div>

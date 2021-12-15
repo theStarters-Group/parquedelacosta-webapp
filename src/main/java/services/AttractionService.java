@@ -27,7 +27,7 @@ public class AttractionService {
 		return attraction;
 	}
 
-	public Atraccion update(int id, String name, double cost, double duration, int capacity, int tipo) {
+	public Atraccion update(int id, String name, double cost, double duration, int capacity, int tipo, String descripcion) {
 		AtraccionDAO atraccionDAO = new AtraccionDAO();
 		Atraccion attraction = atraccionDAO.find(id);
 
@@ -36,6 +36,7 @@ public class AttractionService {
 		attraction.setTiempo(duration);
 		attraction.setCupo(capacity);
 		attraction.setTipo(tipo);
+		attraction.setDescripcion(descripcion);
 
 		if (attraction.isValid()) {
 			atraccionDAO.update(attraction);

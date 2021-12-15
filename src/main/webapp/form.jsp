@@ -41,6 +41,15 @@
 			<c:out value='${attraction.errors.get("tipo")}'></c:out>
 		</div>
 	</div>
+	<div class="mb-3">
+		<label for="descripcion"
+			class='col-form-label ${attraction.errors.get("descripcion") != null ? "is-invalid" : "" }'>Descripcion:</label>
+		<input class="form-control" type="text" id="descripcion" name="descripcion"
+			required value="${attraction.descripcion}"></input>
+		<div class="invalid-feedback">
+			<c:out value='${attraction.errors.get("descripcion")}'></c:out>
+		</div>
+	</div>
 
 
 </div>

@@ -19,10 +19,6 @@
 
 			<div class="bg-light p-4 mb-3 rounded">
 				<h1>Modificar promociones de Parque de la Costa</h1>
-				<h3>
-					<c:out value="${promocion}"></c:out>
-					<%-- 					<c:out value="${oferta}"></c:out> --%>
-				</h3>
 			</div>
 
 			<form action="editPromo.do" method="post">

@@ -207,6 +207,11 @@ public class Atraccion extends Ofertable {
 		this.tipo = tipo;
 	}
 
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+
+	}
+
 	public boolean estaDeshabilitado() {
 		return estado;
 	}
