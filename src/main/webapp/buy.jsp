@@ -27,7 +27,7 @@
 
 						<c:forEach items="${paraComprar}" var="comprable">
 							<c:if
-								test="${user.puedeComprar2(comprable) && comprable.canHost(1) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
+								test="${user.puedeComprar(comprable) && comprable.canHost(1) && !comprable.estaDeshabilitado() && comprable.imagen!=null}">
 								<div class="carousel-item">
 									<img src="${comprable.getImagen()}" class="d-block w-100 h-50"
 										alt="..">
