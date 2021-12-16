@@ -11,7 +11,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ComparadorDeOfertas;
 import model.Ofertable;
+import model.Usuario;
+import persistence.UsuarioDAO;
 import services.OfertaService;
 
 @WebServlet("/listBuy.do")
@@ -31,8 +34,16 @@ public class ListOfertasBuyServlet extends HttpServlet implements Servlet {
 
 		List<Ofertable> paraComprar;
 		try {
+
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+
 			paraComprar = ofertaService.list();
+			int id = Integer.parseInt(req.getParameter("id"));
+			Usuario user = usuarioDAO.find(id);
+			int atraccionFavorita = user.getTipo();
 			req.setAttribute("paraComprar", paraComprar);
+
+			paraComprar.sort(new ComparadorDeOfertas(atraccionFavorita));
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/buy.jsp");
 			dispatcher.forward(req, resp);
 		} catch (SQLException e) {

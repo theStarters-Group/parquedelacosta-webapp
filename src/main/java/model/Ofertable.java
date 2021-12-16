@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Ofertable {
 
@@ -48,19 +49,19 @@ public abstract class Ofertable {
 
 	public abstract double calcularCosto(double datoExtra);
 
-	public boolean contenidoEn(HashMap<Atraccion, String> atraccionComprada) {
+	public boolean contenidoEn(Map<Ofertable, String> compradas) {
 		boolean estaContenida = false;
 		int i = 0;
 		if (this.esPromocion()) {
 			while (i < this.getAtraccionesEnPromocion().length && estaContenida == false) {
 
-				estaContenida = atraccionComprada.containsKey(this.getAtraccionesEnPromocion()[i]);
+				estaContenida = compradas.containsKey(this.getAtraccionesEnPromocion()[i]);
 
 				i++;
 			}
 			return estaContenida;
 		} else {
-			return atraccionComprada.containsKey(this);
+			return compradas.containsKey(this);
 		}
 	}
 

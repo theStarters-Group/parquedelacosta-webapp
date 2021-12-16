@@ -38,7 +38,7 @@
 
 			<span><c:out value="${user.nombre}"></c:out></span>
 			<ul>
-				<li><a class="link_navbar" href="listBuy.do">Comprar</a></li>
+				<li><a class="link_navbar" href="listBuy.do?id=${user.tipo}">Comprar</a></li>
 				<li><a class="link_navbar"
 					href="itinerario.do?id=${user.idUsuario}">Itinerario</a></li>
 				<li><a class="link_navbar" href="perfil.jsp">Mi Perfil</a></li>

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import model.Atraccion;
+import model.ComparadorDeOfertas;
 import model.Ofertable;
 import model.Promocion;
 import persistence.AtraccionDAO;
@@ -19,8 +20,10 @@ public class OfertaService {
 		List<Atraccion> atracciones = atraccionDAO.findAll();
 		List<Promocion> promociones = promocionDAO.findAll(atracciones);
 
+//		int atraccionFavorita = user.getTipo();
 		ofertas.addAll(promociones);
 		ofertas.addAll(atracciones);
+//		ofertas.sort(new ComparadorDeOfertas(atraccionFavorita));
 		return ofertas;
 	}
 

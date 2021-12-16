@@ -166,6 +166,27 @@ public class PromocionDAO {
 
 	}
 
+	public int updateCupo(Promocion promocion) {
+		try {
+			String sql = "UPDATE atracciones SET cupo=? WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			Atraccion[] atraccionesPromo = promocion.getAtraccionesEnPromocion();
+			int rows = 0;
+			for (int i = 0; i < atraccionesPromo.length; i++) {
+				statement.setInt(1, atraccionesPromo[i].getCupo());
+				statement.setInt(2, atraccionesPromo[i].getIdAtraccion());
+
+				rows = statement.executeUpdate();
+			}
+			return rows;
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
 	public int insert(Promocion promocion) throws SQLException {
 		String sql = "INSERT INTO promociones (nombre, id_tipo_promocion, id_tipo_atracciones, dato_extra) VALUES ( ?, ?, ?, ?);";
 		String sql2 = "INSERT INTO atracciones_promo(id_promocion,id_atraccion) values(?,?);";

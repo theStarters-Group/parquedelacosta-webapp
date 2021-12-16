@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Ofertable;
 import model.Usuario;
 import persistence.UsuarioDAO;
 import services.BuyPromocionService;
@@ -32,7 +33,9 @@ public class BuyPromocionServlet extends HttpServlet {
 
 		int promocionId = Integer.parseInt(req.getParameter("id"));
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
+
 		Map<String, String> errors;
+		Map<Ofertable, String> compradas;
 		try {
 			errors = buyPromocionService.buy(user.getIdUsuario(), promocionId);
 			Usuario user2 = usuarioDAO.find(user.getIdUsuario());
@@ -48,7 +51,6 @@ public class BuyPromocionServlet extends HttpServlet {
 			dispatcher.forward(req, resp);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

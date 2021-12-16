@@ -27,7 +27,7 @@
 
 						<c:forEach items="${paraComprar}" var="comprable">
 							<c:if
-								test="${user.puedeComprar(comprable) && comprable.canHost(1) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
+								test="${user.puedeComprar2(comprable) && comprable.canHost(1) && !oferta.estaDeshabilitado() && oferta.imagen!=null}">
 								<div class="carousel-item">
 									<img src="${comprable.getImagen()}" class="d-block w-100 h-50"
 										alt="..">
@@ -48,7 +48,10 @@
 				</div>
 			</div>
 		</div>
-		<h2>Promociones y atracciones disponibles para vos.</h2>
+		<h2>
+			Promociones y atracciones disponibles para vos.
+			<c:out value="${user.compradas}"></c:out>
+		</h2>
 		<c:if test="${flash != null}">
 			<div class="alert alert-info">
 				<p>
@@ -79,7 +82,7 @@
 					<tr>
 
 						<c:if
-							test="${!comprable.estaDeshabilitado() && user.puedeComprar(comprable)}">
+							test="${!comprable.estaDeshabilitado() && user.puedeComprar2(comprable)}">
 
 
 							<td><strong><c:out value="${comprable.nombre}"></c:out></strong>
@@ -94,7 +97,7 @@
 									<c:when test="${comprable.esPromocion()}">
 										<c:choose>
 											<c:when
-												test="${user.puedeComprar(comprable) && comprable.canHost(1)}">
+												test="${user.puedeComprar(comprable) && comprable.canHost(1) && !user.yaCompro(comprable)}">
 												<a href="buyPromo.do?id=${comprable.idPromo}"
 													class="btn btn-success rounded" role="button"><i
 													class="bi bi-cart4"> Comprar</i></a>

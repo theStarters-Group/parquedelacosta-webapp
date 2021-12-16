@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import utils.Crypt;
 
@@ -21,6 +22,7 @@ public class Usuario {
 	private boolean admin;
 	LinkedList<Ofertable> itinerario = new LinkedList<Ofertable>();
 	LinkedList<Ofertable> atraccionComprada = new LinkedList<Ofertable>();
+	protected Map<Ofertable, String> compradas;
 
 	public LinkedList<Ofertable> getAtraccionComprada() {
 		return atraccionComprada;
@@ -69,8 +71,9 @@ public class Usuario {
 		this.dinero = dinero;
 		this.admin = admin;
 		this.password = password;
+		this.compradas = new HashMap<Ofertable, String>();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", password=" + password + ", tiempo="
@@ -95,26 +98,42 @@ public class Usuario {
 
 	}
 
-	public boolean puedeComprar(Ofertable oferta, HashMap<Atraccion, String> atraccionComprada) {
+//	public boolean puedeComprar(Ofertable oferta, HashMap<Atraccion, String> atraccionComprada) {
+//
+//		return this.dinero >= oferta.getCosto() && this.tiempo >= oferta.getTiempo() && oferta.getCupo() > 0
+//				&& !oferta.contenidoEn(atraccionComprada);
+//	}
 
-		return this.dinero >= oferta.getCosto() && this.tiempo >= oferta.getTiempo() && oferta.getCupo() > 0
-				&& !oferta.contenidoEn(atraccionComprada);
+	public boolean puedeComprar(Ofertable oferta) {
+
+		return this.dinero >= oferta.getCosto() && this.tiempo >= oferta.getTiempo() && oferta.getCupo() > 0;
+//				&& !oferta.contenidoEn(this.compradas);
 	}
 
-	public boolean puedeComprar(Ofertable oferta, List<Atraccion> atraccionComprada) {
+	public boolean puedeComprar2(Ofertable oferta) {
+		return oferta.getCosto() <= this.dinero && oferta.getTiempo() <= this.tiempo;
+	}
 
-		return this.dinero >= oferta.getCosto() && this.tiempo >= oferta.getTiempo() && oferta.getCupo() > 0
-				&& !oferta.contenidoEn(atraccionComprada);
+	public boolean yaCompro(Ofertable oferta) {
+		return oferta.contenidoEn(this.compradas);
+	}
+
+//	public boolean puedeComprar(Ofertable oferta, List<Atraccion> atraccionComprada) {
+//
+//		return this.dinero >= oferta.getCosto() && this.tiempo >= oferta.getTiempo() && oferta.getCupo() > 0
+//				&& !oferta.contenidoEn(atraccionComprada);
+//	}
+	public Map<Ofertable, String> getCompradas() {
+		return this.compradas;
 	}
 
 	public LinkedList<Ofertable> getItinerario() {
 		return itinerario;
 	}
 
-	public boolean puedeComprar(Ofertable oferta) {
-		return oferta.getCosto() <= this.dinero && oferta.getTiempo() <= this.tiempo;
+	public void setCompradas(Map<Ofertable, String> compradas) {
+		this.compradas = compradas;
 	}
-
 
 	public boolean canAfford(Ofertable oferta) {
 		return oferta.getCosto() <= this.dinero;
@@ -141,7 +160,6 @@ public class Usuario {
 		String hashed = Crypt.hash(this.password);
 		return Crypt.match(password, hashed);
 	}
-
 
 	public void imprimirItinerario(LinkedList<Ofertable> itinerario, String file) throws IOException {
 

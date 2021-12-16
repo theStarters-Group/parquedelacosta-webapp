@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import model.Atraccion;
 import model.Itinerario;
+import model.Ofertable;
 import model.Usuario;
 import persistence.AtraccionDAO;
 import persistence.ItinerarioDAO;
@@ -19,6 +20,7 @@ public class BuyAttractionService {
 		Map<String, String> errors = new HashMap<String, String>();
 
 		Usuario user = userDAO.find(userId);
+		Map<Ofertable, String> compradas = user.getCompradas();
 		Atraccion attraction = attractionDAO.find(attractionId);
 
 		if (!attraction.hayCupo(1)) {
@@ -32,6 +34,8 @@ public class BuyAttractionService {
 		}
 
 		if (errors.isEmpty()) {
+			compradas.putIfAbsent(attraction, "0");
+			user.setCompradas(compradas);
 			user.addToItinerary(attraction);
 			attraction.actualizarCupo(1);
 			ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
