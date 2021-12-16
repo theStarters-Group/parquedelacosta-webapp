@@ -5,6 +5,10 @@ body {
 	color: #2f3764;
 }
 
+h1{
+	
+}
+
 .login {
 	margin: 0px;
 	min-height: 100vh;
@@ -295,5 +299,38 @@ footer {
 
 .link_footer:visited {
 	color: #ffffff !important;
+	text-decoration: none;
+}
+
+/* packfamiliar.jsp */
+
+.contenedor-prom {
+	padding: 0 10px;
+}
+
+.prom-card {
+	display: inline-block;
+	width: 30%;
+	margin: 15px;
+}
+
+.prom-card-body {
+	display: flex;
+	flex-direction: row;
+	height: 200px;
+	justify-content: space-between;
+}
+
+.prom-card-img {
+	width: 100%;
+	height: 250px;
+}
+
+.btn-promociones {
+	display: flex;
+	justify-content: center;
+}
+
+.prom-link {
 	text-decoration: none;
 }
